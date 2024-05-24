@@ -14,7 +14,7 @@
 	<artifactId>howto</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
-	<name>howto</name>
+	<name>spring-data-jdbc-howto</name>
 	<description>How To project for Spring Data JBBC</description>
 	
 	<properties>
