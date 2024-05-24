@@ -65,12 +65,21 @@ use and extend the functionality of the repository
 this example analyze the main aspects described in the official documentation
 * [Defining Repository Interfaces](https://docs.spring.io/spring-data/relational/reference/repositories/definition.html)
 * [Creating Repository Instances](https://docs.spring.io/spring-data/relational/reference/repositories/create-instances.html) 
+* [Paging, Iterating Large Results, Sorting & Limiting](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.special-parameters)
 * [Custom Repository Implementations](https://docs.spring.io/spring-data/relational/reference/repositories/custom-implementations.html)
+
 
 ### test: PageableAndSortableTest
 
 a simple test that explore the functionality of paging and sorting exposed by the interface ListPagingAndSortingRepository
-or by the Query Methods of the CrudRepository
+or by the Query Methods of the CrudRepository.
+
+Important Note to remember: 
+* APIs taking Sort, Pageable and Limit expect non-null values to be handed into methods. 
+If you do not want to apply any sorting or pagination, use Sort.unsorted(), Pageable.unpaged() and Limit.unlimited().
+* A Page knows about the total number of elements and pages available. It does so by the infrastructure triggering a count query to calculate the overall number. As this might be expensive (depending on the store used), you can instead return a Slice. A Slice knows only about whether a next Slice is available, which might be sufficient when walking through a larger result set
+
+
 
 ### test: CustomRepositoryTest
 

@@ -9,13 +9,15 @@ public class PageableAndSortable {
     private String discriminator;
     @Column("NUMBER")
     private Integer order;
+    private String common;
 
     public PageableAndSortable() {
     }
 
-    public PageableAndSortable(String discriminator, Integer order) {
+    public PageableAndSortable(String discriminator, Integer order, String common) {
         this.discriminator = discriminator;
         this.order = order;
+        this.common = common;
     }
 
     public Long getId() {
@@ -42,6 +44,14 @@ public class PageableAndSortable {
         this.order = order;
     }
 
+    public String getCommon() {
+        return common;
+    }
+
+    public void setCommon(String common) {
+        this.common = common;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,11 +69,11 @@ public class PageableAndSortable {
 
     @Override
     public String toString() {
-        return "PagingAndSorting{" +
+        return "PageableAndSortable{" +
                 "id=" + id +
                 ", discriminator='" + discriminator + '\'' +
-                ", value='" + order + '\'' +
+                ", order=" + order +
+                ", common='" + common + '\'' +
                 '}';
     }
-
 }
