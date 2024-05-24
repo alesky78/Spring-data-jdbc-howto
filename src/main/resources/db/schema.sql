@@ -29,3 +29,14 @@ CREATE TABLE IF NOT EXISTS SIMPLE_CRUD_VERSIONED (
    PRIMARY KEY (ID)
 );
 
+--------------------------
+-- createRepository tables
+--------------------------
+
+CREATE TABLE IF NOT EXISTS PAGEABLE_AND_SORTABLE (
+   ID IDENTITY NOT NULL PRIMARY KEY,
+   DISCRIMINATOR varchar(250) NOT NULL,
+   NUMBER INTEGER,
+   PRIMARY KEY (ID)
+);
+
