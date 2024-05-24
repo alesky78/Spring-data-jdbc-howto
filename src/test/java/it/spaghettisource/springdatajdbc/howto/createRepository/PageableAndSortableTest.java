@@ -91,7 +91,8 @@ public class PageableAndSortableTest {
     @Test
     void findAllByDiscriminatorAndPageable(){
 
-        var sort = Sort.by(Sort.Direction.DESC, "order");
+        //alternative Sort.by("order").descending();
+        var sort = Sort.by(Sort.Direction.DESC, "order","discriminator");  
         var page = PageRequest.of(0,5,sort);
 
         Page<PageableAndSortable> data =  repository.findByDiscriminator("B",page);
