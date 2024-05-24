@@ -22,4 +22,4 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Alessandro D'Ottavio
  */
-interface SimpleCrudRepository extends CrudRepository<SimpleCrud, Long>{}
+interface SimpleCrudManualIdRepository extends CrudRepository<SimpleCrudManualId, Long>{}

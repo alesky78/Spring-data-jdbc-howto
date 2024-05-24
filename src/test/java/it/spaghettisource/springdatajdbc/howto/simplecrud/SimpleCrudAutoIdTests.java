@@ -32,18 +32,18 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBootTest(classes = SimpleCrudConfiguration.class)
 @AutoConfigureJdbc
-class SimpleCrudTests {
+class SimpleCrudAutoIdTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudTests.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudAutoIdTests.class);
 	
 	@Autowired
-	SimpleCrudRepository repository;
+	SimpleCrudAutoIdRepository repository;
 
 	@Test
 	void createSimpleEntity() {
 
 		// create some simple entity
-		var entity = repository.save(new SimpleCrud("simple entity"));
+		var entity = repository.save(new SimpleCrudAutoId("simple entity with auto id generated"));
 
 		logger.info("Simple entity inserted: "+entity.toString());
 
@@ -67,7 +67,7 @@ class SimpleCrudTests {
 	void deleteSimpleEntity() {
 
 		// create some simple entity
-		var entity = repository.save(new SimpleCrud("to delete simple entity"));
+		var entity = repository.save(new SimpleCrudAutoId("to delete simple entity"));
 
 		logger.info("Simple entity to delete created: "+entity.toString());
 

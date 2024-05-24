@@ -19,18 +19,15 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 
-public class SimpleCrud {
+public class SimpleCrudAutoId {
 
 	private @Id Long id;
 	private String name;
 
-	public SimpleCrud() {
-		this.id = null;
-		this.name = name;
+	public SimpleCrudAutoId() {
 	}
 
-	public SimpleCrud(String name) {
-		this.id = null;
+	public SimpleCrudAutoId(String name) {
 		this.name = name;
 	}
 
@@ -50,7 +47,7 @@ public class SimpleCrud {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SimpleCrud entity = (SimpleCrud) o;
+		SimpleCrudAutoId entity = (SimpleCrudAutoId) o;
 
 		return (!Objects.equals(id, entity.id));
     }
@@ -64,7 +61,7 @@ public class SimpleCrud {
 
 	@Override
 	public String toString() {
-		return "Person{" +
+		return "SimpleCrudAutoId{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				'}';
