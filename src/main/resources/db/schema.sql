@@ -1,24 +1,31 @@
 --Create the table at the startup of the DB
 
 --------------------
--- simplecrud
+-- idStrategy tables
 --------------------
 
 CREATE TABLE IF NOT EXISTS SIMPLE_CRUD_AUTO_ID (
-   id IDENTITY NOT NULL PRIMARY KEY,
+   ID IDENTITY NOT NULL PRIMARY KEY,
    NAME varchar(250) NOT NULL,
-   PRIMARY KEY (id)
+   PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS SIMPLE_CRUD_MANUAL_ID_BY_CALL_BACK (
-   id varchar(250) NOT NULL,
+   ID varchar(250) NOT NULL,
    NAME varchar(250) NOT NULL,
-   PRIMARY KEY (id)
+   PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS SIMPLE_CRUD_MANUAL_ID_BY_PERSISTABLE (
-   id varchar(250) NOT NULL,
+   ID varchar(250) NOT NULL,
    NAME varchar(250) NOT NULL,
-   PRIMARY KEY (id)
+   PRIMARY KEY (ID)
+);
+
+CREATE TABLE IF NOT EXISTS SIMPLE_CRUD_VERSIONED (
+   ID IDENTITY NOT NULL PRIMARY KEY,
+   NAME varchar(250) NOT NULL,
+   VERSION INTEGER,
+   PRIMARY KEY (ID)
 );
 

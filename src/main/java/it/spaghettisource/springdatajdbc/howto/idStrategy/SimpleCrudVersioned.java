@@ -19,51 +19,36 @@ import org.springframework.data.annotation.AccessType;
 import org.springframework.data.annotation.AccessType.Type;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.domain.Persistable;
 
 import java.util.Objects;
 
 /**
- * simple entity
+ * versioned entity
  *
  * @author Alessandro D'Ottavio
  */
 @AccessType(Type.FIELD)
-public class SimpleCrudManualIdByPersistable implements Persistable {
+public class SimpleCrudVersioned{
 
-	private @Id String id;
+	private @Id Long id;
 	private String name;
 
-	//use this property to determine if the entity is new
-	@Transient
-	private boolean newEntity;
+	@Version
+	private Long version;
 
-	public SimpleCrudManualIdByPersistable() {
+	public SimpleCrudVersioned() {
 	}
 
-	public SimpleCrudManualIdByPersistable(String name) {
-		this.name = name;
-	}
-
-	public SimpleCrudManualIdByPersistable(String id, String name, boolean newEntity) {
+	public SimpleCrudVersioned(Long id, String name,Long version) {
 		this.id = id;
 		this.name = name;
-		this.newEntity = newEntity;
+		this.version = version;
 	}
 
-	/**
-	 * used by Spring to determine if the entity is new or already present in the DB
-	 */
-	@Override
-	public boolean isNew() {
-		return newEntity;
-	}
-
-
-	public String getId() {return id;}
-
-
-	public void setId(String id) {this.id = id;}
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
 
 	public String getName() {
 		return name;
@@ -72,13 +57,15 @@ public class SimpleCrudManualIdByPersistable implements Persistable {
 		this.name = name;
 	}
 
+	public Long getVersion() {return version;}
+	public void setVersion(Long version) {this.version = version;}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SimpleCrudManualIdByPersistable entity = (SimpleCrudManualIdByPersistable) o;
+		SimpleCrudVersioned entity = (SimpleCrudVersioned) o;
 
 		return (!Objects.equals(id, entity.id));
     }
@@ -92,10 +79,10 @@ public class SimpleCrudManualIdByPersistable implements Persistable {
 
 	@Override
 	public String toString() {
-		return "SimpleCrudManualIdByPersistable{" +
-				"id='" + id + '\'' +
+		return "SimpleCrudVersioned{" +
+				"id=" + id +
 				", name='" + name + '\'' +
-				", newEntity=" + newEntity +
+				", version=" + version +
 				'}';
 	}
 }
