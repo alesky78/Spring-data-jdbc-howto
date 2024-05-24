@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.spaghettisource.springdatajdbc.howto.simplecrud;
+package it.spaghettisource.springdatajdbc.howto.idStrategy;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

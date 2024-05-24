@@ -6,13 +6,13 @@ The following project illustrate how to use some features concretely:
 
 * [Spring Data JDBC documentation](https://docs.spring.io/spring-data/relational/reference/jdbc.html)
 
-## package: it.spaghettisource.springdatajdbc.howto.simplecrud
+## package: it.spaghettisource.springdatajdbc.howto.idStrategy
 
 the scope of this package is to show how to use the standard repository to interact with flat entity (no inner beans) and use it 
 to show the different strategies applicable to generate an ID for the aggregate ROOT:
-* create a simple crud
+
 * show how to use the DB to automatically generate the entity's id
-* show how create manually the entity's id by the application for new entity instead that rely on the DB's ID auto generated
+* show how create manually the entity's id by the application for NEW entity instead that rely on the DB's ID auto generated
 * show how determine by the application if execute and INSERT or an UPDATE and the manage manually the ID
 
 this example analyze in details same aspects of the 

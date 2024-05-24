@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.spaghettisource.springdatajdbc.howto.simplecrud;
+package it.spaghettisource.springdatajdbc.howto.idStrategy;
+
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Demonstrates simple CRUD operations with a simple entity without any references.
@@ -31,38 +32,34 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringBootTest(classes = SimpleCrudConfiguration.class)
 @AutoConfigureJdbc
-class SimpleCrudManualIdByPersistableTests {
+class SimpleCrudAutoIdTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudManualIdByPersistableTests.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudAutoIdTests.class);
 	
 	@Autowired
-	SimpleCrudManualIdByPersistableRepository repository;
+	SimpleCrudAutoIdRepository repository;
 
 	@Test
-	void runInsertAndUpdate() {
+	void createSimpleEntity() {
 
-		//perform insert
-		repository.save(new SimpleCrudManualIdByPersistable("A","MAKE INSERT",true));//make an INSERT
+		// create some simple entity
+		var entity = repository.save(new SimpleCrudAutoId("simple entity with auto id generated"));
 
-		//perform update
-		repository.save(new SimpleCrudManualIdByPersistable("A","MAKE INSERT",false));//make an UPDATE
+		logger.info("Simple entity inserted: "+entity.toString());
 
-		var found = repository.findById("A");
-		logger.info("entity A is: "+found.isPresent());
+		assertThat(entity.getId()).isNotNull();
 
-		assertThat(true).isTrue();
 	}
 
 	@Test
 	void findSimpleEntity() {
 
 		// create some simple entity
-		repository.save(new SimpleCrudManualIdByPersistable("B","1 simple entity with manual id",true));
-		var found = repository.findById("B");
+		var entity = repository.findById(1L);
 
-		logger.info("Simple entity found: "+found.isPresent());
+		logger.info("Simple entity found: "+entity.toString());
 
-		assertThat(found.isPresent()).isTrue();
+		assertThat(entity).isNotNull();
 
 	}
 
@@ -70,12 +67,12 @@ class SimpleCrudManualIdByPersistableTests {
 	void deleteSimpleEntity() {
 
 		// create some simple entity
-		var entity = repository.save(new SimpleCrudManualIdByPersistable("C","to delete simple entity",true));
+		var entity = repository.save(new SimpleCrudAutoId("to delete simple entity"));
 
 		logger.info("Simple entity to delete created: "+entity.toString());
 
 		repository.delete(entity);
-		var delete  = repository.findById("C");
+		var delete  = repository.findById(entity.getId());
 
 		assertThat(delete.isEmpty()).isTrue();
 

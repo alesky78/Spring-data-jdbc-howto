@@ -1,4 +1,4 @@
-package it.spaghettisource.springdatajdbc.howto.simplecrud;
+package it.spaghettisource.springdatajdbc.howto.idStrategy;
 
 import org.springframework.data.repository.ListCrudRepository;
 

@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.spaghettisource.springdatajdbc.howto.simplecrud;
+package it.spaghettisource.springdatajdbc.howto.idStrategy;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.ListCrudRepository;
 
 /**
  * Repository
  *
  * @author Alessandro D'Ottavio
  */
-interface SimpleCrudManualIdByCallBackRepository extends ListCrudRepository<SimpleCrudManualIdByCallBack, String>{}
+interface SimpleCrudAutoIdRepository extends CrudRepository<SimpleCrudAutoId, Long>{}
