@@ -30,4 +30,11 @@ In this example the ID of the entity are generated automatically by the DB
 
 this example show how generate the ID of the entity by application code for the NEW entity. 
 It uses the BeforeConvertCallback to generate the ID.  
-By this solution it is still Spring that is responsible to determine if execute and INSERT and an UPDATE 
+By this solution it is still Spring that is responsible to determine if execute INSERT or UPDATE
+
+### test: SimpleCrudTestsManualIdByPersistableInterfaceTest
+
+Using the Persistable interface we leverage Spring-Data from the responsibility to determine if execute INSERT or UPDATE
+Then we can set manually the ID of the entity and force Spring Data to do an INSERT instead that an UPDATE
+
+Important Note to remember: Properties of Persistable will get detected and persisted if you use AccessType.PROPERTY. To avoid that, use @Transient.
