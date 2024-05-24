@@ -59,7 +59,8 @@ for example using the @Version annotation and implementing Persistable in the wa
 the scope of this package is to show how to use the feature exposed by Spring Data to create, 
 use and extend the functionality of the repository
 
-* show how to use the paging and sorting
+* how to use the paging and sorting
+* how to customize a repository extending its functionality
 
 this example analyze the main aspects described in the official documentation
 * [Defining Repository Interfaces](https://docs.spring.io/spring-data/relational/reference/repositories/definition.html)
@@ -70,5 +71,16 @@ this example analyze the main aspects described in the official documentation
 
 a simple test that explore the functionality of paging and sorting exposed by the interface ListPagingAndSortingRepository
 or by the Query Methods of the CrudRepository
+
+### test: CustomRepositoryTest
+
+This test show the capacity of Spring Data to Extend a Repository using the fragment interfaces.
+In this example we use the extension of the repository to create a generic Insert method that at low level use the 
+[JdbcAggregateTemplate](https://docs.spring.io/spring-data/jdbc/docs/current/api/org/springframework/data/jdbc/core/JdbcAggregateTemplate.html), 
+This permit to control the behaviour of the repository forcing INSERT or UPDATE and skip the Entity State Detection Strategies logic exposed by Spring Data JBDC.
+
+Important Note to remember: The implementation of the JdbcAggregateTemplate in case of an INSERT if the Aggregate support the 
+@Version annotation set automatically the value 0 interdependently by the value that you set in the code, this can be show simply modify 
+this aggregate and add to it the @Version property.
 
 
