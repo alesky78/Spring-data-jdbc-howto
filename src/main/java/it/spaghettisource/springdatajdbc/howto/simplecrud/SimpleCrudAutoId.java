@@ -19,6 +19,11 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 
+/**
+ * simple entity
+ *
+ * @author Alessandro D'Ottavio
+ */
 public class SimpleCrudAutoId {
 
 	private @Id Long id;

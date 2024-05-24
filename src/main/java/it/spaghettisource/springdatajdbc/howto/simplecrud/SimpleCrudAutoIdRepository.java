@@ -18,7 +18,7 @@ package it.spaghettisource.springdatajdbc.howto.simplecrud;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for SimpleCrud
+ * Repository
  *
  * @author Alessandro D'Ottavio
  */

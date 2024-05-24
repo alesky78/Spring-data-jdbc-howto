@@ -16,10 +16,11 @@
 package it.spaghettisource.springdatajdbc.howto.simplecrud;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
 /**
- * Repository for SimpleCrud
+ * Repository
  *
  * @author Alessandro D'Ottavio
  */
-interface SimpleCrudManualIdRepository extends CrudRepository<SimpleCrudManualId, Long>{}
+interface SimpleCrudManualIdByCallBackRepository extends ListCrudRepository<SimpleCrudManualIdByCallBack, String>{}

@@ -15,20 +15,40 @@
  */
 package it.spaghettisource.springdatajdbc.howto.simplecrud;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.data.relational.core.mapping.event.BeforeConvertCallback;
+
+import java.util.UUID;
 
 /**
  * Contains infrastructure necessary for creating repositories, listeners and EntityCallbacks.
  * <p>
  * Not that a listener may change an entity without any problem.
  *
- * @author Jens Schauder
- * @author Mark Paluch
+ * @author Alessandro D'Ottavio
  */
 @Configuration
 @EnableJdbcRepositories
 public class SimpleCrudConfiguration extends AbstractJdbcConfiguration {
+
+
+    /**
+     * An EntityCallback that gets invoked before the aggregate is converted into a database change.
+     * The decision if the change will be an insert or update is made before this callback gets called.
+     */
+    @Bean
+    BeforeConvertCallback<SimpleCrudManualIdByCallBack> beforeSaveCallback() {
+
+        return (entity) -> {
+            //remember that if the ID is null spring has already determined to execute an INSERT
+            if (entity.getId() == null) {
+                entity.setId(UUID.randomUUID().toString()); //generate the ID in the code
+            }
+            return entity;
+        };
+    }
 
 }

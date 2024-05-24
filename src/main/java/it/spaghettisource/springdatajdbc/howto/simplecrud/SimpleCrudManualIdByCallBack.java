@@ -19,21 +19,25 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 
-public class SimpleCrudManualId {
+/**
+ * simple entity
+ *
+ * @author Alessandro D'Ottavio
+ */
+public class SimpleCrudManualIdByCallBack {
 
-	private @Id Long id;
+	private @Id String id;
 	private String name;
 
-	public SimpleCrudManualId() {
+	public SimpleCrudManualIdByCallBack() {
 	}
 
-	public SimpleCrudManualId(Long id, String name) {
-		this.id = id;
+	public SimpleCrudManualIdByCallBack(String name) {
 		this.name = name;
 	}
 
-	public Long getId() {return id;}
-	public void setId(Long id) {this.id = id;}
+	public String getId() {return id;}
+	public void setId(String id) {this.id = id;}
 
 	public String getName() {
 		return name;
@@ -48,7 +52,7 @@ public class SimpleCrudManualId {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SimpleCrudManualId entity = (SimpleCrudManualId) o;
+		SimpleCrudManualIdByCallBack entity = (SimpleCrudManualIdByCallBack) o;
 
 		return (!Objects.equals(id, entity.id));
     }

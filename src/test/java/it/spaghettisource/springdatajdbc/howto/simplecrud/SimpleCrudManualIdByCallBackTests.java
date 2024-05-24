@@ -31,34 +31,37 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringBootTest(classes = SimpleCrudConfiguration.class)
 @AutoConfigureJdbc
-class SimpleCrudManualIdTests {
+class SimpleCrudManualIdByCallBackTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudManualIdTests.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudManualIdByCallBackTests.class);
 	
 	@Autowired
-	SimpleCrudManualIdRepository repository;
+	SimpleCrudManualIdByCallBackRepository repository;
 
 	@Test
 	void createSimpleEntity() {
 
 		// create some simple entity
-		var entity = repository.save(new SimpleCrudManualId(2L,"simple entity with manual id"));
+		repository.save(new SimpleCrudManualIdByCallBack("1 simple entity with manual id"));
+		repository.save(new SimpleCrudManualIdByCallBack("2 simple entity with manual id"));
+		repository.save(new SimpleCrudManualIdByCallBack("3 simple entity with manual id"));
 
-		logger.info("Simple entity inserted: "+entity.toString());
+		var all = repository.findAll();
+		all.forEach(entity -> logger.info("Simple entity inserted: "+entity.toString()));
 
-		assertThat(entity.getId()).isNotNull();
-
+		assertThat(all.size()).isGreaterThan(0);
 	}
 
 	@Test
 	void findSimpleEntity() {
 
 		// create some simple entity
-		var entity = repository.findById(1L);
+		var entity = repository.save(new SimpleCrudManualIdByCallBack("1 simple entity with manual id"));
+		var found = repository.findById(entity.getId());
 
-		logger.info("Simple entity found: "+entity.toString());
+		logger.info("Simple entity found: "+found.isPresent());
 
-		assertThat(entity).isNotNull();
+		assertThat(found.isPresent()).isTrue();
 
 	}
 
@@ -66,7 +69,7 @@ class SimpleCrudManualIdTests {
 	void deleteSimpleEntity() {
 
 		// create some simple entity
-		var entity = repository.save(new SimpleCrudManualId(3L,"to delete simple entity"));
+		var entity = repository.save(new SimpleCrudManualIdByCallBack("to delete simple entity"));
 
 		logger.info("Simple entity to delete created: "+entity.toString());
 
