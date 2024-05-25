@@ -51,7 +51,7 @@ public class Custom {
 
         Custom custom = (Custom) o;
 
-        if (!Objects.equals(id, custom.id)) return false;
+        if (Objects.equals(id, custom.id)) return false;
         return Objects.equals(data, custom.data);
     }
 

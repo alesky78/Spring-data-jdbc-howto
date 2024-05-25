@@ -47,3 +47,18 @@ CREATE TABLE IF NOT EXISTS CUSTOM (
    PRIMARY KEY (ID)
 );
 
+---------------------------
+-- defineQueryMethod tables
+---------------------------
+
+CREATE TABLE IF NOT EXISTS SIMPLE_QUERY_METHOD (
+   ID IDENTITY NOT NULL PRIMARY KEY,
+   NAME varchar(250) NOT NULL,
+   AGE INTEGER,
+   BIRTH_DATE  DATE NOT NULL,
+   JOB varchar(250) NOT NULL,
+   PRIMARY KEY (ID)
+);
+
+
+

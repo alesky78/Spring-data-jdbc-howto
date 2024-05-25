@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  *
  * @author Alessandro D'Ottavio
  */
-@SpringBootTest(classes = SimpleCrudConfiguration.class)
+@SpringBootTest(classes = ConfigurationIdStrategy.class)
 @AutoConfigureJdbc
 class SimpleCrudVersionedTest {
 

@@ -30,7 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  *
  * @author Alessandro D'Ottavio
  */
-@SpringBootTest(classes = SimpleCrudConfiguration.class)
+@SpringBootTest(classes = ConfigurationIdStrategy.class)
 @AutoConfigureJdbc
 class SimpleCrudAutoIdTests {
 

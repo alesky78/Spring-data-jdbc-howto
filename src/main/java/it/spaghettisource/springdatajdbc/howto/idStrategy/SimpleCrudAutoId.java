@@ -54,7 +54,7 @@ public class SimpleCrudAutoId {
 
 		SimpleCrudAutoId entity = (SimpleCrudAutoId) o;
 
-		return (!Objects.equals(id, entity.id));
+		return Objects.equals(id, entity.id);
     }
 
 	@Override

@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = RepositoryConfiguration.class)
+@SpringBootTest(classes = ConfigurationCreateRepository.class)
 @AutoConfigureJdbc
 public class PageableAndSortableTest {
 

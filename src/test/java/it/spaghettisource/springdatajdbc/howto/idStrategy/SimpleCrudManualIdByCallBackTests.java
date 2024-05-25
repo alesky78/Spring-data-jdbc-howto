@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Alessandro D'Ottavio
  */
-@SpringBootTest(classes = SimpleCrudConfiguration.class)
+@SpringBootTest(classes = ConfigurationIdStrategy.class)
 @AutoConfigureJdbc
 class SimpleCrudManualIdByCallBackTests {
 

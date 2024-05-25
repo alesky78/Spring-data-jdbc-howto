@@ -80,7 +80,7 @@ public class SimpleCrudManualIdByPersistable implements Persistable {
 
 		SimpleCrudManualIdByPersistable entity = (SimpleCrudManualIdByPersistable) o;
 
-		return (!Objects.equals(id, entity.id));
+		return Objects.equals(id, entity.id);
     }
 
 	@Override

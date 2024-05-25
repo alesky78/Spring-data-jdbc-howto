@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.spaghettisource.springdatajdbc.howto.idStrategy;
+package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -24,51 +25,90 @@ import java.util.Objects;
  *
  * @author Alessandro D'Ottavio
  */
-public class SimpleCrudManualIdByCallBack {
+public class SimpleQueryMethod {
 
-	private @Id String id;
+	private @Id Long id;
 	private String name;
+	private Integer age;
+	private LocalDate birthDate;
+	private String job;
 
-	public SimpleCrudManualIdByCallBack() {
-	}
-
-	public SimpleCrudManualIdByCallBack(String name) {
+	public SimpleQueryMethod(String name, Integer age, LocalDate birthDate, String job) {
 		this.name = name;
+		this.age = age;
+		this.birthDate = birthDate;
+		this.job = job;
 	}
 
-	public String getId() {return id;}
-	public void setId(String id) {this.id = id;}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SimpleCrudManualIdByCallBack entity = (SimpleCrudManualIdByCallBack) o;
+		SimpleQueryMethod that = (SimpleQueryMethod) o;
 
-		return Objects.equals(id, entity.id);
+		return Objects.equals(id, that.id);
     }
 
 	@Override
 	public int hashCode() {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (age != null ? age.hashCode() : 0);
+		result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+		result = 31 * result + (job != null ? job.hashCode() : 0);
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "SimpleCrudManualId{" +
+		return "SimpleQueryMethod{" +
 				"id=" + id +
 				", name='" + name + '\'' +
+				", age=" + age +
+				", bornDate=" + birthDate +
+				", role='" + job + '\'' +
 				'}';
 	}
+
 }

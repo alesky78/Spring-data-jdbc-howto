@@ -67,7 +67,7 @@ public class SimpleCrudVersioned{
 
 		SimpleCrudVersioned entity = (SimpleCrudVersioned) o;
 
-		return (!Objects.equals(id, entity.id));
+		return Objects.equals(id, entity.id);
     }
 
 	@Override
