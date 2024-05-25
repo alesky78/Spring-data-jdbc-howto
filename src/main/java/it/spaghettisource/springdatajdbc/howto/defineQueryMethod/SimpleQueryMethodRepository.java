@@ -29,5 +29,10 @@ public interface SimpleQueryMethodRepository extends ListCrudRepository<SimpleQu
 
     List<SimpleQueryMethod> findByNameNotContaining(String name);
 
+    List<SimpleQueryMethod> findAllByOrderByAgeDesc();
+
+    List<SimpleQueryMethod> findAllByOrderByAgeDescNameAsc();
+
+
 
 }

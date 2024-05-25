@@ -116,5 +116,21 @@ public class SimpleQueryMethodTest {
         assertThat(elements.size()).isGreaterThan(0);
     }
 
+    @Test
+    void orderBy(){
+        var elements = repository.findAllByOrderByAgeDesc();
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void combinedOrderBy(){
+        var elements = repository.findAllByOrderByAgeDescNameAsc();
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+    }
+
 
 }
