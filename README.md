@@ -109,7 +109,7 @@ this aggregate and add to it the @Version property.
 
 ## package: it.spaghettisource.springdatajdbc.howto.defineQueryMethod
 
-the scope of this package is to show how to define and user Query Method on the spring Repository
+the scope of this package is to show how to define and use Query Method on the spring Repository
 
 * how to define a query by a method name  
 * how to define manually by annotation
@@ -123,7 +123,8 @@ The [Query Lookup Strategies](https://docs.spring.io/spring-data/relational/refe
 that spring data jdbc used rely on [CREATE_IF_NOT_FOUND](https://docs.spring.io/spring-data/relational/reference/jdbc/query-methods.html#jdbc.query-methods.strategies).
 This can be overwritten defining the queryLookupStrategy attribute of the EnableJdbcRepositories annotation
 
-
+The [Named Query in the @query ](https://docs.spring.io/spring-data/relational/reference/jdbc/query-methods.html#jdbc.query-methods.named-query)
+could be store in a file instead that in the @Query annotation itself
 
 This package doesn't cover this topics
 
