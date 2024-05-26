@@ -17,58 +17,49 @@ package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
 /**
  * simple entity
  *
  * @author Alessandro D'Ottavio
  */
-public class QueryByAnnotationNestedOne {
+public class QueryByAnnotationEmbeddedOne {
 
-	private @Id Long id;
-	private String name;
 
-	public QueryByAnnotationNestedOne() {
+	private String job;
+	private Integer age;
+
+	public QueryByAnnotationEmbeddedOne() {
 	}
 
-	public Long getId() {
-		return id;
+	public QueryByAnnotationEmbeddedOne(String job, Integer age) {
+		this.job = job;
+		this.age = age;
+	}
+	public String getJob() {
+		return job;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setJob(String job) {
+		this.job = job;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		QueryByAnnotationNestedOne that = (QueryByAnnotationNestedOne) o;
-
-        return Objects.equals(id, that.id);
-    }
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
 
 	@Override
 	public String toString() {
-		return "QueryByAnnotationNestedOne{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+		return "PropertyExpressionsEmbedded{" +
+				"  job='" + job + '\'' +
+				", age=" + age +
 				'}';
 	}
+
+
+
 }

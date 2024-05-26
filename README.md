@@ -143,7 +143,7 @@ Important Note to remember:
 
 a simple test that show how to make query by methods names traversing nested properties for nested been and embedded bean in the aggregate root.
 * spring Data Jdbc doesn't support the property expression for the nested properties, we use instead @Query to go over this limitation. This test prove this problem
-* spring Data Jdbc support the property expression for the embedded properties. 
+* spring Data Jdbc support the property expression for the @Embedded bean properties. 
 
 official documentation of the [Property Expressions](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.query-methods.query-property-expressions)
 
@@ -152,12 +152,13 @@ Important Note to remember:
 * Spring Data Jdbc doesn't support [nested property using query by method names (ticket #1227 open)](https://github.com/spring-projects/spring-data-relational/issues/1227) 
   :for example one nested bean  ( mapped by 1 to 1 for with is own table). 
   If a method that use this technics is implemented  Spring Data will throw java.lang.IllegalArgumentException: Cannot query by nested property at application start-up,
+* underscores (_) is a reserved character, Spring strongly advise to follow standard Java naming conventions, see the official documentation to see the possible name conflict and how to avoid it  
 
 
 ### test: QueryByAnnotationTest
 
-a simple test that explore the functionality of creating query by @Query annotation.
-this test show multyple scenarion
+a simple test that explore the functionality of creating query by @Query annotation. This test show multiple scenario:
 * query on the root aggregate
+* query on the embedded aggregate
 * query on the nested aggregate (1 -> 1)
 * query on the nested aggregate (1 -> M)

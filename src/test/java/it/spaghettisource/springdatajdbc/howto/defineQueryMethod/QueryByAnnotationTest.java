@@ -6,10 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
-
-import java.time.LocalDate;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,15 +17,15 @@ public class QueryByAnnotationTest {
     private static final Logger logger = LoggerFactory.getLogger(QueryByAnnotationTest.class);
 
     @Autowired
-    QueryByAnnotationRepository repository;
+    QueryByAnnotationRootRepository repository;
 
-//    @Test
-//    void findByParameter_UniqueResult(){
-//        var element = repository.find
-//        logger.info("element found"+element.get());
-//
-//        assertThat(element.isPresent()).isTrue();
-//    }
+    @Test
+    void findAll(){
+        var elements = repository.findAll();
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+    }
 
 
 

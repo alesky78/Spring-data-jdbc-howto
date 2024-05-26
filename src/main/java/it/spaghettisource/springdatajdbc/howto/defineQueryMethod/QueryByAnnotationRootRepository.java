@@ -4,7 +4,7 @@ import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;
 
-public interface QueryByAnnotationRepository extends ListCrudRepository<QueryByAnnotationRoot,Long> {
+public interface QueryByAnnotationRootRepository extends ListCrudRepository<QueryByAnnotationRoot,Long> {
 
 
     List<PropertyExpressionsRoot> findAllByName(String address);
