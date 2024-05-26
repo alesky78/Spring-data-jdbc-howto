@@ -22,44 +22,10 @@ public class QueryByAnnotationTest {
     @Autowired
     QueryByAnnotationRootRepository repository;
 
-
-    @Test
-    void create(){
-
-        var embedded =  new QueryByAnnotationEmbeddedOne();
-        embedded.setAge(23);
-        embedded.setJob("STUDENT");
-
-        var nested = new QueryByAnnotationNestedOne();
-        nested.setNestedName("Nested bean created");
-
-        var nestedMany1 = new QueryByAnnotationNestedMany();
-        var nestedMany2 = new QueryByAnnotationNestedMany();
-        var nestedMany3 = new QueryByAnnotationNestedMany();
-
-        nestedMany1.setElement("element 1");
-        nestedMany2.setElement("element 2");
-        nestedMany3.setElement("element 3");
-        Set<QueryByAnnotationNestedMany> set = new HashSet<QueryByAnnotationNestedMany>();
-        set.add(nestedMany1);
-        set.add(nestedMany2);
-        set.add(nestedMany3);
-
-        var root = new QueryByAnnotationRoot();
-        root.setName("Root");
-        root.setEmbedded(embedded);
-        root.setNested(nested);
-        root.setList(set);
-
-        root = repository.save(root);
-        logger.info("save executed:"+root.toString());
-
-        var list = repository.findByName("Root"); //Lucas Root
-        list.forEach(e -> logger.info("find executed:"+e.toString()));
-
-        assertThat(true).isTrue();
-    }
-
+    /**
+     * example to make Spring Data write the query in the log
+     * so that can be used to write the SQL to use in the @Query annotation
+     */
     @Test
     void findAll(){
         var elements = repository.findAll();
@@ -68,16 +34,50 @@ public class QueryByAnnotationTest {
         assertThat(elements.size()).isGreaterThan(0);
     }
 
+    /**
+     * this example is based on this query  {@link QueryByAnnotationRootRepository#findByName_missingNestedOneMapping(String)}
+     * show two important point:
+     * 1)   if you have 1 to 1 relationship, in the select clause it is mandatory to define all the alias correctly
+     *      to respect the mapping convention or Spring Data JDBC will be not able to map back the row received:
+     *      this method will return a null QueryByAnnotationNestedOne also if in the DB it is present
+     * 2)   to 1 to M relationship are executed in a different query also if not present in this query Spring will run the separate query related to 1 to M
+     */
     @Test
-    void findByNestedName(){
-        var elements = repository.findByNestedName("nested 1");
+    void findByName_SelectNotRespectedConvention(){
+        var elements = repository.findByName_missingNestedOneMapping("Lucas");
+        elements.forEach(e -> {logger.info(e.toString());
+                               assertThat(e.getNested()).isNull();}
+                        );
+    }
+
+    /**
+     * this example is based on this query  {@link QueryByAnnotationRootRepository#findByName_properNestedOneMapping(String)}
+     * show two important point:
+     * 1)   if you have 1 to 1 relationship, in the select clause it is mandatory to define all the alias correctly
+     *      to respect the mapping convention or Spring Data JDBC will be not able to map back the row received:
+     *      this method will return a proper QueryByAnnotationNestedOne
+     * 2)   to 1 to M relationship are executed in a different query also if not present in this query Spring will run the separate query related to 1 to M
+     */
+    @Test
+    void findByName_properNestedOneMapping(){
+        var elements = repository.findByName_properNestedOneMapping("Lucas");
+        elements.forEach(e -> {logger.info(e.toString());
+                                assertThat(e.getNested()).isNotNull();}
+        );
+    }
+
+    /**
+     * this example is based on this query  {@link QueryByAnnotationRootRepository#findByElement(String)}
+     * show two important point:
+     * 1)   if you have 1 to M relationship and write a complex query to analyse the condition in the M part of the relationship if a record is found
+     *      the query on the 1 to M relationship are executed again in a different query
+     */
+    @Test
+    void findByElement_properNestedOneMapping(){
+        var elements = repository.findByElement("other first element");
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);
     }
-
-
-
-
 
 }

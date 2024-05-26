@@ -161,8 +161,37 @@ Important Note to remember:
 
 ### test: QueryByAnnotationTest
 
-a simple test that explore the functionality of creating query by @Query annotation. This test show multiple scenario:
-* query on the root aggregate
-* query on the embedded aggregate
-* query on the nested aggregate (1 -> 1)
-* query on the nested aggregate (1 -> M)
+This test that explore the functionality of creating query by @Query annotation. This test use a complex aggregation root composed by
+* simple properties on the aggregation root
+* one the embedded bean (1 to 1)
+* one nested bean (1 to 1)
+* one nested bean (1 to M)
+
+If you want to write an appropriate SQL in the @Query annotation is mandatory to understand how the mapping of Spring Data works: 
+Spring Data Jdbc expected that the name of the columns returned in the select clausole of the statement are named respecting 
+the convention or it will be not able to map it back correctly.
+The [mapping](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html) convention in the documentation 
+doesn't cover everything but is a good point where to start: the section [Convention-based Mapping](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html#mapping.conventions)
+and [Naming Strategy](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html#mapping.conventions) are important in this context.
+
+a simple way to write automatically the structure of the SQL query that you should add in the @Query annotation, is to write a test and run the standard findAll() on the repository, if you have the sql logging enable
+Spring Data JDBC will write the complete query in the log, now you can take it and modify
+
+Behaviour of Spring Data Jdbc: 
+* if you have a aggregate root (with its repository) that has a 1 to 1 relationship, to build back the object automatically 
+  Spring Data JDBC expected that the the sql in the @Query obtain the result in a unique query:
+  you have to write (probably) a join and the select clausole must contain the field al the aggregate root and the bean in the 1 to 1 relationship
+* if you have a aggregate root (with its repository) that has a 1 to M relationship, Spring Data JDBC execute first a unique query on the 
+  aggregate root and all the 1 to 1 bean in relationship using join, then execute a new query for each 1 to M relationship. This can be exploited: 
+  you can write a @Query that consider only the aggregate root and the 1 to 1 relationship then spring will run automatically the query on the  1 to M relationship
+  completing automatically the return mapping
+* the name convention for the alias to define in the select clausole for the @Embedded bean is the same of the aggregate root, example:
+  an aggregate Root with an @Embedded Book book{ String author} become --> SELECT Root.author AS author from FROM Root
+* the name convention for the alias to define in the select clausole for the 1 to 1 relationship is "name property in the agregate root"_"name property in the bean", example:
+  an aggregate Root with an 1 to 1 Book book{ String author} become --> SELECT book.author AS book_author from FROM Root LEFT OUTER JOIN Book book  
+ 
+
+
+
+
+

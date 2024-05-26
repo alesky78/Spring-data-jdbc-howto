@@ -16,6 +16,7 @@
 package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.LocalDate;
 import java.util.Objects;
