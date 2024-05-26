@@ -84,6 +84,7 @@ a simple test that explore the functionality of paging and sorting exposed by th
 or by the Query Methods of the CrudRepository.
 
 Important Note to remember: 
+* [Which return types is more Appropriate: List Vs Slice Vs Page Vs ....](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.scrolling.guidance)
 * APIs taking Sort, Pageable and Limit expect non-null values to be handed into methods. 
 If you do not want to apply any sorting or pagination, use Sort.unsorted(), Pageable.unpaged() and Limit.unlimited().
 * A Page knows about the total number of elements and pages available. It does so by the infrastructure triggering a count query to calculate the overall number. As this might be expensive (depending on the store used), you can instead return a Slice. A Slice knows only about whether a next Slice is available, which might be sufficient when walking through a larger result set
@@ -118,23 +119,35 @@ The [Query Lookup Strategies](https://docs.spring.io/spring-data/relational/refe
 that spring data jdbc used rely on [CREATE_IF_NOT_FOUND](https://docs.spring.io/spring-data/relational/reference/jdbc/query-methods.html#jdbc.query-methods.strategies).
 This can be overwritten defining the queryLookupStrategy attribute of the EnableJdbcRepositories annotation
 
+
+
+This package doesn't cover this topics
+
+* [Paging, Iterating Large Results, Sorting & Limiting](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.special-parameters) becouse already analyzed in the test: PageableAndSortableTest
+
+### test: SimpleQueryMethodTest
+
+a simple test that explore the functionality of creating query by methods names.
+
 the full set of key work can be found here
 * [Repository query keywords](https://docs.spring.io/spring-data/relational/reference/repositories/query-keywords-reference.html)
 * [Repository query return types supportted by spring data jdbc - table 1](https://docs.spring.io/spring-data/relational/reference/jdbc/query-methods.html#jdbc.query-methods.strategies)
 * [Repository query return types](https://docs.spring.io/spring-data/relational/reference/repositories/query-return-types-reference.html)
 
-This package doesn't do example for this topics
+Important Note to remember:
+* Spring try to honor the return type of the method but in case it is not possible, it return an exception like IncorrectResultSizeDataAccessException
 
-* [Paging, Iterating Large Results, Sorting & Limiting](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.special-parameters) becouse already analyzed in the test test: PageableAndSortableTest
+### test: PropertyExpressionsRootTest
 
-### test: SimpleQueryMethodTest
+a simple test that show how to make query by methods names traversing nested properties of nested been in the aggregate root.
+Remember that spring Data Jdbc doesn't support the property expression for the nested properties, 
+we use instead @Query to go over this limitation. This test prove this problem  
 
-a simple test that explore the functionality of paging and sorting exposed by the interface ListPagingAndSortingRepository
-or by the Query Methods of the CrudRepository.
+official documentation of the [Property Expressions](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.query-methods.query-property-expressions)
 
 Important Note to remember:
-* APIs taking Sort, Pageable and Limit expect non-null values to be handed into methods.
-  If you do not want to apply any sorting or pagination, use Sort.unsorted(), Pageable.unpaged() and Limit.unlimited().
-* A Page knows about the total number of elements and pages available. It does so by the infrastructure triggering a count query to calculate the overall number. As this might be expensive (depending on the store used), you can instead return a Slice. A Slice knows only about whether a next Slice is available, which might be sufficient when walking through a larger result set
 
+* Spring Data Jdbc doesn't support [Filtering by nested property (ticket #1227 open)](https://github.com/spring-projects/spring-data-relational/issues/1227) 
+  for nested bean mapped pointing another table (1 to 1 for example). 
+  If a method that use this technics is implemented  Spring Data will throw java.lang.IllegalArgumentException: Cannot query by nested property at application start-up,
 
