@@ -22,6 +22,13 @@
 	</properties>
 	
 	<dependencies>
+
+		<!-- necessary for the h2 console -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -30,7 +37,8 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<!-- necessary for the h2 console run-->
+			<!--<scope>runtime</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

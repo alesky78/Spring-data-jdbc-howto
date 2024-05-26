@@ -18,8 +18,8 @@ public interface PropertyExpressionRootRepository extends ListCrudRepository<Pro
 //    List<PropertyExpressionsRoot> findAllByNested_Address(String address);
 
 
-    @Query("SELECT PROPERTY_EXPRESSIONS_ROOT.ID AS ID, PROPERTY_EXPRESSIONS_ROOT.NAME AS NAME, nested.ID AS NESTED_ID, nested.ADDRESS AS NESTED_ADDRESS FROM PROPERTY_EXPRESSIONS_ROOT " +
-            "LEFT OUTER JOIN PROPERTY_EXPRESSIONS_NESTED nested ON nested.PROPERTY_EXPRESSIONS_ROOT = PROPERTY_EXPRESSIONS_ROOT.ID " +
+    @Query("SELECT PROPERTY_EXPRESSIONS_ROOT.ID AS ID, PROPERTY_EXPRESSIONS_ROOT.NAME AS NAME, nested.ID AS NESTED_ID, nested.ADDRESS AS NESTED_ADDRESS " +
+            "FROM PROPERTY_EXPRESSIONS_ROOT LEFT OUTER JOIN PROPERTY_EXPRESSIONS_NESTED nested ON nested.PROPERTY_EXPRESSIONS_ROOT = PROPERTY_EXPRESSIONS_ROOT.ID " +
             "WHERE nested.ADDRESS = :address")
     List<PropertyExpressionsRoot> findAllByNested_AddressWithQueryAnnotation(@Param("address") String address);
 
