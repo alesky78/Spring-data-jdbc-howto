@@ -23,5 +23,9 @@ public interface PropertyExpressionRootRepository extends ListCrudRepository<Pro
             "WHERE nested.ADDRESS = :address")
     List<PropertyExpressionsRoot> findAllByNested_AddressWithQueryAnnotation(@Param("address") String address);
 
+
+    List<PropertyExpressionsRoot> findAllByEmbedded_Job(String job);
+
+
 }
 

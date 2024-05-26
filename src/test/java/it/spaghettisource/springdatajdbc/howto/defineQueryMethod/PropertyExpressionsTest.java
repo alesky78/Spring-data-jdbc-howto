@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = ConfigurationDefineQueryMethod.class)
 @AutoConfigureJdbc
-public class PropertyExpressionsRootTest {
+public class PropertyExpressionsTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(QueryByMethodTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(PropertyExpressionsTest.class);
 
     @Autowired
     PropertyExpressionRootRepository repository;
@@ -42,6 +42,16 @@ public class PropertyExpressionsRootTest {
     void findByNestedPropertyUsingQueryAnnotation(){
 
         var elements = repository.findAllByNested_AddressWithQueryAnnotation("Boulevard General Louis");
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+
+    }
+
+    @Test
+    void findByEmbeddedProperty(){
+
+        var elements = repository.findAllByEmbedded_Job("DIRECTOR");
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);

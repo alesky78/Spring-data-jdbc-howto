@@ -128,6 +128,7 @@ This package doesn't cover this topics
 ### test: QueryByMethodTest
 
 a simple test that explore the functionality of creating query automatically by methods names.
+This test explore just the query method on the root aggregate, see the test PropertyExpressionsTest for embedded or nested beans
 
 the full set of key work can be found here
 * [Repository query keywords](https://docs.spring.io/spring-data/relational/reference/repositories/query-keywords-reference.html)
@@ -137,11 +138,12 @@ the full set of key work can be found here
 Important Note to remember:
 * Spring try to honor the return type of the method but in case it is not possible, it return an exception like IncorrectResultSizeDataAccessException
 
-### test: PropertyExpressionsRootTest
 
-a simple test that show how to make query by methods names traversing nested properties of nested been in the aggregate root.
-Remember that spring Data Jdbc doesn't support the property expression for the nested properties, 
-we use instead @Query to go over this limitation. This test prove this problem  
+### test: PropertyExpressionsTest
+
+a simple test that show how to make query by methods names traversing nested properties for nested been and embedded bean in the aggregate root.
+* spring Data Jdbc doesn't support the property expression for the nested properties, we use instead @Query to go over this limitation. This test prove this problem
+* spring Data Jdbc support the property expression for the embedded properties. 
 
 official documentation of the [Property Expressions](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.query-methods.query-property-expressions)
 
@@ -151,3 +153,11 @@ Important Note to remember:
   :for example one nested bean  ( mapped by 1 to 1 for with is own table). 
   If a method that use this technics is implemented  Spring Data will throw java.lang.IllegalArgumentException: Cannot query by nested property at application start-up,
 
+
+### test: QueryByAnnotationTest
+
+a simple test that explore the functionality of creating query by @Query annotation.
+this test show multyple scenarion
+* query on the root aggregate
+* query on the nested aggregate (1 -> 1)
+* query on the nested aggregate (1 -> M)
