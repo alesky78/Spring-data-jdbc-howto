@@ -28,7 +28,7 @@ import java.util.Objects;
 public class QueryByAnnotationNestedOne {
 
 	private @Id Long id;
-	private String name;
+	private String nestedName;
 
 	public QueryByAnnotationNestedOne() {
 	}
@@ -41,12 +41,12 @@ public class QueryByAnnotationNestedOne {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNestedName() {
+		return nestedName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNestedName(String nestedName) {
+		this.nestedName = nestedName;
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class QueryByAnnotationNestedOne {
 	public String toString() {
 		return "QueryByAnnotationNestedOne{" +
 				"id=" + id +
-				", name='" + name + '\'' +
+				", nestedName='" + nestedName + '\'' +
 				'}';
 	}
 }

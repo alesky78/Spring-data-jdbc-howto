@@ -28,7 +28,7 @@ import java.util.Objects;
 public class QueryByAnnotationNestedMany {
 
 	private @Id Long id;
-	private String name;
+	private String element;
 
 
 	public QueryByAnnotationNestedMany() {
@@ -42,12 +42,12 @@ public class QueryByAnnotationNestedMany {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getElement() {
+		return element;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setElement(String element) {
+		this.element = element;
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class QueryByAnnotationNestedMany {
 	public String toString() {
 		return "QueryByAnnotationNestedMany{" +
 				"id=" + id +
-				", name='" + name + '\'' +
+				", element='" + element + '\'' +
 				'}';
 	}
 }

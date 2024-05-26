@@ -3,7 +3,9 @@ collection of how to example to show how to implement specific UC.
 Based on Spring 3.3.0
 
 ### Guides
-The following project illustrate how to use some features concretely, where possible the link of the official documentation is referenced: [Spring Data JDBC documentation](https://docs.spring.io/spring-data/relational/reference/jdbc.html).
+The following project illustrate how to use some features concretely, 
+where possible the link of the official documentation is referenced: [Spring Data JDBC documentation](https://docs.spring.io/spring-data/relational/reference/jdbc.html).
+Moreover Spring Data JDBC expose a set of [examples](https://github.com/spring-projects/spring-data-examples/tree/main/jdbc) that can be analyzed
 
 ## package: it.spaghettisource.springdatajdbc.howto.idStrategy
 the scope of this package is to show how to use the standard repository to interact with flat entity (no inner beans) and use it 
@@ -18,9 +20,11 @@ this example analyze the main aspects described in the official documentation
 * [ID Generation](https://docs.spring.io/spring-data/relational/reference/jdbc/entity-persistence.html#entity-persistence.id-generation) 
 * [Entity State Detection Strategies](https://docs.spring.io/spring-data/relational/reference/repositories/core-concepts.html#is-new-state-detection)
 
-
 The detection strategy defined in the documentation"Providing a custom EntityInformation implementation" is not analyzed in this examples
 
+this test don't analyze ID strategy related to References to other entities, see the official documentation section
+[Supported Types in Your Entity](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html#jdbc.entity-persistence.types)
+with particular attention to the second related to "References to other entities" for the 1 to 1 and the Set, Map and List used for the 1 to M 
 
 ### test: SimpleCrudAutoIdTest
 
