@@ -27,19 +27,9 @@ import java.util.Objects;
  */
 public class QueryByAnnotationNestedMany {
 
-	private @Id Long id;
 	private String element;
 
-
 	public QueryByAnnotationNestedMany() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getElement() {
@@ -57,19 +47,18 @@ public class QueryByAnnotationNestedMany {
 
 		QueryByAnnotationNestedMany that = (QueryByAnnotationNestedMany) o;
 
-        return Objects.equals(id, that.id);
+        return Objects.equals(element, that.element);
     }
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		return element != null ? element.hashCode() : 0;
 	}
 
 	@Override
 	public String toString() {
 		return "QueryByAnnotationNestedMany{" +
-				"id=" + id +
-				", element='" + element + '\'' +
+				"element='" + element + '\'' +
 				'}';
 	}
 }

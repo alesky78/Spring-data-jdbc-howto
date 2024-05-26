@@ -27,19 +27,11 @@ import java.util.Objects;
  */
 public class QueryByAnnotationNestedOne {
 
-	private @Id Long id;
 	private String nestedName;
 
 	public QueryByAnnotationNestedOne() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNestedName() {
 		return nestedName;
@@ -56,19 +48,18 @@ public class QueryByAnnotationNestedOne {
 
 		QueryByAnnotationNestedOne that = (QueryByAnnotationNestedOne) o;
 
-        return Objects.equals(id, that.id);
+        return Objects.equals(nestedName, that.nestedName);
     }
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		return nestedName != null ? nestedName.hashCode() : 0;
 	}
 
 	@Override
 	public String toString() {
 		return "QueryByAnnotationNestedOne{" +
-				"id=" + id +
-				", nestedName='" + nestedName + '\'' +
+				"nestedName='" + nestedName + '\'' +
 				'}';
 	}
 }

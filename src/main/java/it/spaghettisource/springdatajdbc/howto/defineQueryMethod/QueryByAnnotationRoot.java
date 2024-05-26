@@ -17,6 +17,7 @@ package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -41,7 +42,10 @@ public class QueryByAnnotationRoot {
 
 	private Set<QueryByAnnotationNestedMany> list;
 
+
 	public QueryByAnnotationRoot() {}
+
+
 
 	public Long getId() {
 		return id;
@@ -79,8 +83,8 @@ public class QueryByAnnotationRoot {
 		return list;
 	}
 
-	public void setList(Set<QueryByAnnotationNestedMany> list) {
-		this.list = list;
+	public void setList(Set<QueryByAnnotationNestedMany> set) {
+		this.list = set;
 	}
 
 	@Override
