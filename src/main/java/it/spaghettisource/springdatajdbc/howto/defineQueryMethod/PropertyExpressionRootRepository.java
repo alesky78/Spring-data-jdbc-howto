@@ -13,7 +13,7 @@ public interface PropertyExpressionRootRepository extends ListCrudRepository<Pro
     /**
      * Spring Data Jdbc doesn't support nested properties for nested bean mapped in another table
      *  if this method is de-commented, will throw java.lang.IllegalArgumentException: Cannot query by nested property: nested.address
-     *  at application start-up, use @Query for this cases instead
+     *  at application start-up, use @Query for this cases instead, the next method show exactly how to do it
      */
 //    List<PropertyExpressionsRoot> findAllByNested_Address(String address);
 

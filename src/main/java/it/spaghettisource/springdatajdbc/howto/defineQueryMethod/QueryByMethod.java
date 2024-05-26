@@ -25,7 +25,7 @@ import java.util.Objects;
  *
  * @author Alessandro D'Ottavio
  */
-public class SimpleQueryMethod {
+public class QueryByMethod {
 
 	private @Id Long id;
 	private String name;
@@ -33,7 +33,7 @@ public class SimpleQueryMethod {
 	private LocalDate birthDate;
 	private String job;
 
-	public SimpleQueryMethod(String name, Integer age, LocalDate birthDate, String job) {
+	public QueryByMethod(String name, Integer age, LocalDate birthDate, String job) {
 		this.name = name;
 		this.age = age;
 		this.birthDate = birthDate;
@@ -85,7 +85,7 @@ public class SimpleQueryMethod {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		SimpleQueryMethod that = (SimpleQueryMethod) o;
+		QueryByMethod that = (QueryByMethod) o;
 
 		return Objects.equals(id, that.id);
     }

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureJdbc
 public class PropertyExpressionsRootTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleQueryMethodTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(QueryByMethodTest.class);
 
     @Autowired
     PropertyExpressionRootRepository repository;

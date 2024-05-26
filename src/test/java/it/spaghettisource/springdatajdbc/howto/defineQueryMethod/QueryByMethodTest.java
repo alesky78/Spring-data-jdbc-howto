@@ -16,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = ConfigurationDefineQueryMethod.class)
 @AutoConfigureJdbc
-public class SimpleQueryMethodTest {
+public class QueryByMethodTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleQueryMethodTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(QueryByMethodTest.class);
 
     @Autowired
-    SimpleQueryMethodRepository repository;
+    QueryByMethodRepository repository;
 
     @Test
     void findByParameter_UniqueResult(){

@@ -125,9 +125,9 @@ This package doesn't cover this topics
 
 * [Paging, Iterating Large Results, Sorting & Limiting](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.special-parameters) becouse already analyzed in the test: PageableAndSortableTest
 
-### test: SimpleQueryMethodTest
+### test: QueryByMethodTest
 
-a simple test that explore the functionality of creating query by methods names.
+a simple test that explore the functionality of creating query automatically by methods names.
 
 the full set of key work can be found here
 * [Repository query keywords](https://docs.spring.io/spring-data/relational/reference/repositories/query-keywords-reference.html)
@@ -147,7 +147,7 @@ official documentation of the [Property Expressions](https://docs.spring.io/spri
 
 Important Note to remember:
 
-* Spring Data Jdbc doesn't support [Filtering by nested property (ticket #1227 open)](https://github.com/spring-projects/spring-data-relational/issues/1227) 
-  for nested bean mapped pointing another table (1 to 1 for example). 
+* Spring Data Jdbc doesn't support [nested property using query by method names (ticket #1227 open)](https://github.com/spring-projects/spring-data-relational/issues/1227) 
+  :for example one nested bean  ( mapped by 1 to 1 for with is own table). 
   If a method that use this technics is implemented  Spring Data will throw java.lang.IllegalArgumentException: Cannot query by nested property at application start-up,
 
