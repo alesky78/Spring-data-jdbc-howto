@@ -102,17 +102,18 @@ In this example we use the extension of the repository to create a generic Inser
 This permit to control the behaviour of the repository forcing INSERT or UPDATE and skip the Entity State Detection Strategies logic exposed by Spring Data JBDC.
 
 Important Note to remember: The implementation of the JdbcAggregateTemplate in case of an INSERT if the Aggregate support the 
-@Version annotation set automatically the value 0 interdependently by the value that you set in the code, this can be show simply modify 
-this aggregate and add to it the @Version property.
-
+@Version annotation set automatically the value 0 interdependently by the value that you set in the bean. 
+If you want to simulate it: 
+modify the aggregate root adding to it a @Version property, add the version column in the CUSTOM table and write a test method.
 
 
 ## package: it.spaghettisource.springdatajdbc.howto.defineQueryMethod
 
-the scope of this package is to show how to define and use Query Method on the spring Repository
+the scope of this package is to show how to define and use Query Method on the spring Repository to:
 
-* how to define a query by a method name  
-* how to define manually by annotation
+* select aggregate by method name  
+* select aggregate writing manually SQL by @Query annotation
+* insert or update writing manually SQL by conjunction of @Query and @Modifying annotation and all the consequences of this choose
   
 this example analyze the main aspects described in the official documentation
 * [Spring data](https://docs.spring.io/spring-data/commons/reference/repositories/query-methods-details.html)
@@ -181,16 +182,32 @@ Spring Data JDBC will write the complete query in the log, now you can take it a
 Behaviour of Spring Data Jdbc: 
 * if you have a aggregate root (with its repository) that has a 1 to 1 relationship, to build back the object automatically 
   Spring Data JDBC expected that the the sql in the @Query obtain the result in a unique query:
-  you have to write (probably) a join and the select clausole must contain the field al the aggregate root and the bean in the 1 to 1 relationship
+  you have to write (probably) a join and the select part of the sql  must contain the field al the aggregate root and the bean in the 1 to 1 relationship
 * if you have a aggregate root (with its repository) that has a 1 to M relationship, Spring Data JDBC execute first a unique query on the 
   aggregate root and all the 1 to 1 bean in relationship using join, then execute a new query for each 1 to M relationship. This can be exploited: 
   you can write a @Query that consider only the aggregate root and the 1 to 1 relationship then spring will run automatically the query on the  1 to M relationship
   completing automatically the return mapping
-* the name convention for the alias to define in the select clausole for the @Embedded bean is the same of the aggregate root, example:
+* the name convention for the alias to define in the select part of the sql for the @Embedded bean is the same of the aggregate root, example:
   an aggregate Root with an @Embedded Book book{ String author} become --> SELECT Root.author AS author from FROM Root
-* the name convention for the alias to define in the select clausole for the 1 to 1 relationship is "name property in the agregate root"_"name property in the bean", example:
+* the name convention for the alias to define in the select part of the sql for the 1 to 1 relationship is "name property in the agregate root"_"name property in the bean", example:
   an aggregate Root with an 1 to 1 Book book{ String author} become --> SELECT book.author AS book_author from FROM Root LEFT OUTER JOIN Book book  
- 
+
+
+### test: ModifyByQueryAnnotationTest
+
+This test show hot to use the conjunction of @Query and @Modifying annotation to write writing manually SQL INSERT or UPDATE statement.
+This functionality is described also in the [official documentation](https://docs.spring.io/spring-data/relational/reference/jdbc/query-methods.html#jdbc.query-methods.at-query.modifying)
+
+Before to start to use this feature is important to understand that using @Modifying has some important drawbacks
+*  Modifying queries are executed directly against the database. No events or callbacks get called. 
+   Therefore also fields with auditing annotations do not get updated if they don’t get updated in the annotated query
+*  @Version is not managed by this query then this must be implemented manually in the SQL query: VERSION = VERSION +1 WHERE ID = :id
+*  Also if the is managed directly in the SQL (VERSION = VERSION +1 WHERE ID = :id) Spring doesn't throw OptimisticLockingFailureException()
+   in case of a missing update, it is responsibility of the developer find a solution to throw the OptimisticLockingFailureException if expected
+
+
+
+
 
 
 

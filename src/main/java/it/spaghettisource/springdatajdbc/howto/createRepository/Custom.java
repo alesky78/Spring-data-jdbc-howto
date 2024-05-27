@@ -9,8 +9,6 @@ public class Custom {
 
     private @Id Long id;
     private String data;
-
-
     public Custom() {
     }
 
