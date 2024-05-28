@@ -20,20 +20,31 @@ public class SingleCollectionTest {
     @Autowired
     SingleCollectionRootRepository repository;
 
+    /**
+     * this test exist just to show in the Log the N+1 statements execution
+     */
    @Test
     public void test() {
 
-        var root = repository.findById(0L);
+       var elements = repository.findAll();
+       elements.forEach(e -> logger.info(e.toString()));
 
-        assertThat(root.isPresent()).isNotNull();
-        logger.info("after save: "+root.get());
-
+       assertThat(elements.size()).isGreaterThan(0);
     }
 
     @Test
-    public void findAll_SingleManualQuery() {
+    public void findAll_Manual_ByQueryAnnotation() {
 
         var elements = repository.findAllBy_SingleQuery_ByExtractor();
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+    }
+
+    @Test
+    public void findAll_Manual_NamedParameterJdbcOperations() {
+
+        var elements = repository.findAllBy_NamedParameterJdbcOperations();
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);

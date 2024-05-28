@@ -209,21 +209,21 @@ Before to start to use this feature is important to understand that using @Modif
 
 the scope of this package is to show how to approach the N+1 problem in Spring Data JDBC.
 
-Virtually Spring Data JDBC loads complete aggregates in one go. But if you looked at what SQL actually gets run, but for non flat aggregates (involve 1-to-M), multiple SQL statements get run.
-This is the N+1 problem, since, for an aggregate with a single collection to load N aggregates, N+1 queries get executed (one for the root and N for the child entities).
+Virtually Spring Data JDBC loads complete aggregates in one go. But if you looked at what SQL actually gets run, for not-flat aggregates (involve 1-to-M) multiple SQL statements get run.
+This is the N+1 problem. For example: having an aggregate with a single collection of N elements, to load N aggregates, N+1 queries get executed (one for the root and N for the child entities).
 
-* If there is only a single collection, you may do a join, but that falls apart when there are multiple collections.
-* The actual Spring Data JDBC (since 3.2) framework expose the [Single Query Loading](https://docs.spring.io/spring-data/relational/reference/jdbc/entity-persistence.html#jdbc.loading-aggregates) functionality
+Several strategies are possible to solve this problem:
+* you may do a join and then parse the response to your specific object.
+* Spring Data JDBC (since 3.2) framework expose the [Single Query Loading](https://docs.spring.io/spring-data/relational/reference/jdbc/entity-persistence.html#jdbc.loading-aggregates) functionality
   but at this stage this is experimental functionality and cover limited cases. the detail of the implemented solution can be found in this [article of the official spring blog](https://spring.io/blog/2023/08/31/this-is-the-beginning-of-the-end-of-the-n-1-problem-introducing-single-query)
 
-the scope of this package is to show how to solve this problem for this cases:
-* the single collection on the aggregate root
-* the native solution proposed by Spring Data JDBC
+the scope of this package is to show how to solve this problem.
 
 ### test: SingleCollectionTest
+Spring Data JDBC permit at low level to extend the default behaviour of the repository.
+This test show exactly this, how to solve the problem with a programmatic manual approach.
 
-This test show hot to solve the problem when there is a single collection on the aggregate root.
-The approached solution are
-
-* @Query annotation and an ResultSetExtractor
-
+the solution proposed are:
+* prepare a @Query annotation with a join over all the tables and configure a custom ResultSetExtractor
+* extend the repository and use JdbcAggregateTemplate to write again custom query that solve the N+1 problem, in this case the solution is exactly the same as before
+  but we show how we can do it using the NamedParameterJdbcOperations instead that in a custom @Query annotation

@@ -2,10 +2,11 @@ package it.spaghettisource.springdatajdbc.howto.nPlu1;
 
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;
 
-public interface SingleCollectionRootRepository extends CrudRepository<SingleCollectionRoot,Long> {
+public interface SingleCollectionRootRepository extends ListCrudRepository<SingleCollectionRoot,Long>, SingleCollectionRootRepositoryFragment {
 
     @Query(value = """
             SELECT SINGLE_COLLECTION_ROOT.ID AS ID, SINGLE_COLLECTION_ROOT.NAME AS NAME,  
