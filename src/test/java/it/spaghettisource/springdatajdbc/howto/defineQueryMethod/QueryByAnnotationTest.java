@@ -70,7 +70,7 @@ public class QueryByAnnotationTest {
      * this example is based on this query  {@link QueryByAnnotationRootRepository#findByElement(String)}
      * show two important point:
      * 1)   if you have 1 to M relationship and write a complex query to analyse the condition in the M part of the relationship if a record is found
-     *      the query on the 1 to M relationship are executed again in a different query
+     *      the query on the 1 to M relationship are executed again in a different query, the 1+N problem persist here
      */
     @Test
     void findByElement_properNestedOneMapping(){

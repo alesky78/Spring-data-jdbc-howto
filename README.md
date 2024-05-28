@@ -169,30 +169,29 @@ This test that explore the functionality of creating query by @Query annotation.
 * one nested bean (1 to 1)
 * one nested bean (1 to M)
 
-If you want to write an appropriate SQL in the @Query annotation is mandatory to understand how the mapping of Spring Data works: 
-Spring Data Jdbc expected that the name of the columns returned in the select clausole of the statement are named respecting 
-the convention or it will be not able to map it back correctly.
+If you want to write an appropriate SQL query in the @Query annotation, it is mandatory to understand how the mapping in Spring Data works. 
+Spring Data JDBC expects that the names of the columns returned in the select clause of the statement follow the naming convention; 
+otherwise, it will not be able to map them correctly.
 The [mapping](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html) convention in the documentation 
 doesn't cover everything but is a good point where to start: the section [Convention-based Mapping](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html#mapping.conventions)
 and [Naming Strategy](https://docs.spring.io/spring-data/relational/reference/jdbc/mapping.html#mapping.conventions) are important in this context.
 
-a simple way to write automatically the structure of the SQL query that you should add in the @Query annotation, is to write a test and run the standard findAll() on the repository, if you have the sql logging enable
-Spring Data JDBC will write the complete query in the log, now you can take it and modify
+The simplest way to automatically write the skeleton structure of the SQL query that you can add in the @Query annotation is to write a test and run the standard findAll() or findById() methods on the repository. 
+If you have SQL logging enabled, Spring Data JDBC will log the complete query. You can then take this logged query and modify it to write your custom query.
 
 Behaviour of Spring Data Jdbc: 
-* if you have a aggregate root (with its repository) that has a 1 to 1 relationship, to build back the object automatically 
-  Spring Data JDBC expected that the the sql in the @Query obtain the result in a unique query:
-  you have to write (probably) a join and the select part of the sql  must contain the field al the aggregate root and the bean in the 1 to 1 relationship
-* if you have a aggregate root (with its repository) that has a 1 to M relationship, Spring Data JDBC execute first a unique query on the 
-  aggregate root and all the 1 to 1 bean in relationship using join, then execute a new query for each 1 to M relationship. This can be exploited: 
-  you can write a @Query that consider only the aggregate root and the 1 to 1 relationship then spring will run automatically the query on the  1 to M relationship
-  completing automatically the return mapping
-* the name convention for the alias to define in the select part of the sql for the @Embedded bean is the same of the aggregate root, example:
-  an aggregate Root with an @Embedded Book book{ String author} become --> SELECT Root.author AS author from FROM Root
-* the name convention for the alias to define in the select part of the sql for the 1 to 1 relationship is "name property in the agregate root"_"name property in the bean", example:
-  an aggregate Root with an 1 to 1 Book book{ String author} become --> SELECT book.author AS book_author from FROM Root LEFT OUTER JOIN Book book  
+* If you have an aggregate root (with its repository) that has a 1-to-1 relationship, to automatically reconstruct the object,
+  Spring Data JDBC expects that the SQL in the @Query obtains the result in a single query:
+  you need to write (probably) a join, and the select part of the SQL must contain the fields of both the aggregate root and the bean in the 1-to-1 relationship.).
+* If you have an aggregate root (with its repository) that has a 1-to-M relationship, Spring Data JDBC first executes a single query on the aggregate root and all the 1-to-1 beans in the relationship using joins, 
+  then executes a new query for the 1-to-M relationship (the 1+N problem). This behavior can be exploited: if your method return the same type of the repository you can write a @Query that considers only the aggregate root 
+  and all the other the 1-to-1 relationships, and Spring will automatically run the queries for the 1-to-M relationships, completing the return mapping automatically.
+* The naming convention for the aliases to define in the select part of the SQL for the @Embedded bean is the same as for the aggregate root. 
+  For example, an aggregate root with an @Embedded Book book containing String author becomes SELECT Root.author AS author FROM Root.
+* The naming convention for the aliases to define in the select part of the SQL for the 1-to-1 relationship is "name of the property in the aggregate root"_"name of the property in the bean". 
+  For example, an aggregate root with a 1-to-1 Book book containing String author becomes SELECT book.author AS book_author FROM Root LEFT OUTER JOIN Book book.
 
-
+  
 ### test: ModifyByQueryAnnotationTest
 
 This test show hot to use the conjunction of @Query and @Modifying annotation to write writing manually SQL INSERT or UPDATE statement.
