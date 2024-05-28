@@ -6,4 +6,6 @@ public interface SingleCollectionRootRepositoryFragment {
 
 
     List<SingleCollectionRoot> findAllBy_NamedParameterJdbcOperations();
+
+    List<SingleCollectionRoot> findAllBy_JdbcTemplate();
 }

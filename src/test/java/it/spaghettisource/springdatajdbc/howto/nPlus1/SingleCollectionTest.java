@@ -50,4 +50,13 @@ public class SingleCollectionTest {
         assertThat(elements.size()).isGreaterThan(0);
     }
 
+    @Test
+    public void findAll_Manual_JdbcTemplate() {
+
+        var elements = repository.findAllBy_JdbcTemplate();
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+    }
+
 }
