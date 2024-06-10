@@ -15,7 +15,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	
 	<name>spring-data-jdbc-howto</name>
-	<description>How To project for Spring Data JBBC</description>
+	<description>How To project for Spring Data JDBC</description>
 	
 	<properties>
 		<java.version>22</java.version>
