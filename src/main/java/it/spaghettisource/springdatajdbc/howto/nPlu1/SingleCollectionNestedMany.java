@@ -24,42 +24,50 @@ import java.util.Objects;
  */
 public class SingleCollectionNestedMany {
 
-	private String element;
+    private String element;
 
-	public SingleCollectionNestedMany() {
-	}
+    public SingleCollectionNestedMany(){
 
-	public SingleCollectionNestedMany(String element) {
-		this.element = element;
-	}
+    }
 
-	public String getElement() {
-		return element;
-	}
+    public SingleCollectionNestedMany(String element){
 
-	public void setElement(String element) {
-		this.element = element;
-	}
+        this.element = element;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+    public String getElement(){
 
-		SingleCollectionNestedMany that = (SingleCollectionNestedMany) o;
+        return element;
+    }
+
+    public void setElement(String element){
+
+        this.element = element;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        SingleCollectionNestedMany that = (SingleCollectionNestedMany) o;
 
         return Objects.equals(element, that.element);
     }
 
-	@Override
-	public int hashCode() {
-		return element != null ? element.hashCode() : 0;
-	}
+    @Override
+    public int hashCode(){
 
-	@Override
-	public String toString() {
-		return "QueryByAnnotationNestedMany{" +
-				"element='" + element + '\'' +
-				'}';
-	}
+        return element != null ? element.hashCode() : 0;
+    }
+
+    @Override
+    public String toString(){
+
+        return "QueryByAnnotationNestedMany{" +
+                "element='" + element + '\'' +
+                '}';
+    }
+
 }

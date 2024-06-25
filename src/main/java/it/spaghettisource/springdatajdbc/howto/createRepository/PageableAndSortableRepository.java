@@ -11,7 +11,7 @@ public interface PageableAndSortableRepository extends CrudRepository<PageableAn
     /**
      * example of pageable by query composition
      */
-    List<PageableAndSortable> findByDiscriminator(String discriminator,Limit limit);
+    List<PageableAndSortable> findByDiscriminator(String discriminator, Limit limit);
 
     /**
      * example of sorting by query composition
@@ -24,9 +24,7 @@ public interface PageableAndSortableRepository extends CrudRepository<PageableAn
     Page<PageableAndSortable> findByDiscriminator(String discriminator, Pageable pageable);
 
 
-    Slice<PageableAndSortable> findByCommon(String common,Pageable pageable);
-
-
+    Slice<PageableAndSortable> findByCommon(String common, Pageable pageable);
 
 
 }

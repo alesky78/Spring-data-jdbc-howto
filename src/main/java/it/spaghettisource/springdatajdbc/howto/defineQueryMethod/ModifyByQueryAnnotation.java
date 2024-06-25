@@ -18,7 +18,6 @@ package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -28,61 +27,72 @@ import java.util.Objects;
  */
 public class ModifyByQueryAnnotation {
 
-	private @Id Long id;
-	private String name;
+    private @Id Long id;
+    private String name;
 
-	@Version
-	private Long version;
+    @Version
+    private Long version;
 
-	public ModifyByQueryAnnotation() {
-	}
+    public ModifyByQueryAnnotation(){
 
-	public Long getId() {
-		return id;
-	}
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId(){
 
-	public String getName() {
-		return name;
-	}
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id){
 
-	public Long getVersion() {
-		return version;
-	}
+        this.id = id;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
+    public String getName(){
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+        return name;
+    }
 
-		ModifyByQueryAnnotation that = (ModifyByQueryAnnotation) o;
+    public void setName(String name){
+
+        this.name = name;
+    }
+
+    public Long getVersion(){
+
+        return version;
+    }
+
+    public void setVersion(Long version){
+
+        this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        ModifyByQueryAnnotation that = (ModifyByQueryAnnotation) o;
 
         return Objects.equals(id, that.id);
     }
 
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
+    @Override
+    public int hashCode(){
+
+        return id != null ? id.hashCode() : 0;
+    }
 
 
-	@Override
-	public String toString() {
-		return "ModifyByQueryAnnotation{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", version=" + version +
-				'}';
-	}
+    @Override
+    public String toString(){
+
+        return "ModifyByQueryAnnotation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", version=" + version +
+                '}';
+    }
+
 }

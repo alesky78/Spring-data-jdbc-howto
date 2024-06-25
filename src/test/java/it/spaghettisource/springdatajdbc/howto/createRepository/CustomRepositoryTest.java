@@ -21,11 +21,11 @@ public class CustomRepositoryTest {
     @Test
     void forceInsertByFragmentInterface(){
 
-        var created = repository.insert(new Custom(10L,"Data"));
-        logger.info("forced INSERT by fragment interface:"+created);
+        var created = repository.insert(new Custom(10L, "Data"));
+        logger.info("forced INSERT by fragment interface:" + created);
 
         created = repository.save(created);
-        logger.info("fstandard save:"+created);
+        logger.info("fstandard save:" + created);
 
         assertThat(created).isNotNull();
     }

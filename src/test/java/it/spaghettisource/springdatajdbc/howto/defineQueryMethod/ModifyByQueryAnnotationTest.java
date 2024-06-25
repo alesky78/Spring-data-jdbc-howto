@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.dao.OptimisticLockingFailureException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,13 +25,13 @@ public class ModifyByQueryAnnotationTest {
 
         var element = repository.findByName("Marc");
         Long version = element.getVersion();
-        logger.info("before update: "+element);
+        logger.info("before update: " + element);
 
-        boolean update = repository.updateNameNoVersionManaged(element.getId(),"UPDATE");
+        boolean update = repository.updateNameNoVersionManaged(element.getId(), "UPDATE");
         assertThat(update).isTrue();
 
         element = repository.findByName("UPDATE");
-        logger.info("after update: "+element);
+        logger.info("after update: " + element);
 
         assertThat(version == element.getVersion()).isTrue();
 
@@ -43,13 +42,13 @@ public class ModifyByQueryAnnotationTest {
 
         var element = repository.findByName("Alex");
         Long version = element.getVersion();
-        logger.info("before update: "+element);
+        logger.info("before update: " + element);
 
         boolean update = repository.updateNameVersionManaged(element.getId(), 1L, "VERSIONED");
         assertThat(update).isTrue();
 
         element = repository.findByName("VERSIONED");
-        logger.info("after update: "+element);
+        logger.info("after update: " + element);
 
         assertThat(version != element.getVersion()).isTrue();
 
@@ -60,10 +59,10 @@ public class ModifyByQueryAnnotationTest {
 
         var element = repository.findByName("Lucas");
         Long version = element.getVersion();
-        logger.info("before update: "+element);
+        logger.info("before update: " + element);
 
         boolean update = repository.updateNameVersionManaged(element.getId(), 0L, "VERSIONED");
-        logger.info("update executed?: "+update);
+        logger.info("update executed?: " + update);
         assertThat(update).isFalse();
 
     }
@@ -72,12 +71,12 @@ public class ModifyByQueryAnnotationTest {
     void updateName_VersionNotRespected_ThrowOptimisticLockingFailureException(){
 
         assertThrows(OptimisticLockingFailureException.class,
-                ()->{
+                () -> {
                     var element = repository.findByName("Maria");
                     Long version = element.getVersion();
-                    logger.info("before update: "+element);
+                    logger.info("before update: " + element);
 
-                    if(!repository.updateNameVersionManaged(element.getId(), 0L, "VERSIONED")) {
+                    if(!repository.updateNameVersionManaged(element.getId(), 0L, "VERSIONED")){
                         throw new OptimisticLockingFailureException("version doesn't match");
                     }
                 });

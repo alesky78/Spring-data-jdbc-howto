@@ -35,70 +35,71 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @AutoConfigureJdbc
 class SimpleCrudVersionedTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudVersioned.class);
-	
-	@Autowired
-	SimpleCrudVersionedRepository repository;
+    private static final Logger logger = LoggerFactory.getLogger(SimpleCrudVersioned.class);
 
-	@Test
-	void runInsertForIdAndVersionNull() {
+    @Autowired
+    SimpleCrudVersionedRepository repository;
 
-		//in this case spring has no doubt, there is no version and no ID then will do an insert
-		var entity = repository.save(new SimpleCrudVersioned(null,"MAKE INSERT",null));//make an INSERT
+    @Test
+    void runInsertForIdAndVersionNull(){
 
-		logger.info("entity inserted: "+entity);
+        //in this case spring has no doubt, there is no version and no ID then will do an insert
+        var entity = repository.save(new SimpleCrudVersioned(null, "MAKE INSERT", null));//make an INSERT
 
-		assertThat(entity).isNotNull();
-	}
+        logger.info("entity inserted: " + entity);
 
-	@Test()
-	void throwExceptionForIdNullAndVersionNotNull() {
-		assertThrows(OptimisticLockingFailureException.class,
-				()->{
-					//in this case spring will try to do an update because also if the ID is null the version is populated then suppose entity already exsist
-					var entity = repository.save(new SimpleCrudVersioned(null,"MAKE INSERT",10L));//make an UPDATE also if the entity no exsit
-				});
-	}
+        assertThat(entity).isNotNull();
+    }
 
-	@Test()
-	void runInsertForIdNotNullAndVersionNull() {
+    @Test()
+    void throwExceptionForIdNullAndVersionNotNull(){
 
-		//this case show that the version is has an Higher priority that an ID:
-		//If a property annotated with @Version is null, or in case of a version property of primitive type 0 the entity is considered new (INSERT!)
-		//this happen independently by the value of the property ID ()
+        assertThrows(OptimisticLockingFailureException.class,
+                () -> {
+                    //in this case spring will try to do an update because also if the ID is null the version is populated then suppose entity already exsist
+                    var entity = repository.save(new SimpleCrudVersioned(null, "MAKE INSERT", 10L));//make an UPDATE also if the entity no exsit
+                });
+    }
 
-		var entity = repository.save(new SimpleCrudVersioned(100L,"MAKE INSERT",null));//make an INSERT also if the ID has a value
+    @Test()
+    void runInsertForIdNotNullAndVersionNull(){
 
-		assertThat(entity).isNotNull();
+        //this case show that the version is has an Higher priority that an ID:
+        //If a property annotated with @Version is null, or in case of a version property of primitive type 0 the entity is considered new (INSERT!)
+        //this happen independently by the value of the property ID ()
 
-	}
+        var entity = repository.save(new SimpleCrudVersioned(100L, "MAKE INSERT", null));//make an INSERT also if the ID has a value
 
-	@Test
-	void findEntity() {
+        assertThat(entity).isNotNull();
 
-		// create some simple entity
-		var entity = repository.save(new SimpleCrudVersioned(null,"1 simple entity with manual id",null));
-		var found = repository.findById(entity.getId());
+    }
 
-		logger.info("Simple entity found: "+found.isPresent());
+    @Test
+    void findEntity(){
 
-		assertThat(found.isPresent()).isTrue();
+        // create some simple entity
+        var entity = repository.save(new SimpleCrudVersioned(null, "1 simple entity with manual id", null));
+        var found = repository.findById(entity.getId());
 
-	}
+        logger.info("Simple entity found: " + found.isPresent());
 
-	@Test
-	void deleteEntity() {
+        assertThat(found.isPresent()).isTrue();
 
-		// create some simple entity
-		var entity = repository.save(new SimpleCrudVersioned(null,"to delete simple entity",null));
+    }
 
-		logger.info("Simple entity to delete created: "+entity.toString());
+    @Test
+    void deleteEntity(){
 
-		repository.delete(entity);
-		var delete  = repository.findById(entity.getId());
+        // create some simple entity
+        var entity = repository.save(new SimpleCrudVersioned(null, "to delete simple entity", null));
 
-		assertThat(delete.isEmpty()).isTrue();
+        logger.info("Simple entity to delete created: " + entity.toString());
 
-	}
+        repository.delete(entity);
+        var delete = repository.findById(entity.getId());
+
+        assertThat(delete.isEmpty()).isTrue();
+
+    }
 
 }

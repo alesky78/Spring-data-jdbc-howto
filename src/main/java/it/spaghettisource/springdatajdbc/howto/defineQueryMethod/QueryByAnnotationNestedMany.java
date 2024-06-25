@@ -15,9 +15,6 @@
  */
 package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
-import org.springframework.data.annotation.Id;
-
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -27,38 +24,45 @@ import java.util.Objects;
  */
 public class QueryByAnnotationNestedMany {
 
-	private String element;
+    private String element;
 
-	public QueryByAnnotationNestedMany() {
-	}
+    public QueryByAnnotationNestedMany(){
 
-	public String getElement() {
-		return element;
-	}
+    }
 
-	public void setElement(String element) {
-		this.element = element;
-	}
+    public String getElement(){
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+        return element;
+    }
 
-		QueryByAnnotationNestedMany that = (QueryByAnnotationNestedMany) o;
+    public void setElement(String element){
+
+        this.element = element;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        QueryByAnnotationNestedMany that = (QueryByAnnotationNestedMany) o;
 
         return Objects.equals(element, that.element);
     }
 
-	@Override
-	public int hashCode() {
-		return element != null ? element.hashCode() : 0;
-	}
+    @Override
+    public int hashCode(){
 
-	@Override
-	public String toString() {
-		return "QueryByAnnotationNestedMany{" +
-				"element='" + element + '\'' +
-				'}';
-	}
+        return element != null ? element.hashCode() : 0;
+    }
+
+    @Override
+    public String toString(){
+
+        return "QueryByAnnotationNestedMany{" +
+                "element='" + element + '\'' +
+                '}';
+    }
+
 }

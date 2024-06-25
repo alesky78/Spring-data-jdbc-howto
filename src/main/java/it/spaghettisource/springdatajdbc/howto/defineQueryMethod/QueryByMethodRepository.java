@@ -11,7 +11,7 @@ public interface QueryByMethodRepository extends ListCrudRepository<QueryByMetho
 
     Optional<QueryByMethod> findByName(String name);
 
-    List<QueryByMethod> findByAgeGreaterThan(int age) ;
+    List<QueryByMethod> findByAgeGreaterThan(int age);
 
     List<QueryByMethod> findByAgeBetween(int from, int to);
 
@@ -32,7 +32,6 @@ public interface QueryByMethodRepository extends ListCrudRepository<QueryByMetho
     List<QueryByMethod> findAllByOrderByAgeDesc();
 
     List<QueryByMethod> findAllByOrderByAgeDescNameAsc();
-
 
 
 }

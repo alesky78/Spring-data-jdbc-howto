@@ -1,6 +1,5 @@
 package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;

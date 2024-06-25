@@ -31,71 +31,87 @@ import java.util.Objects;
 @AccessType(Type.FIELD)
 public class SimpleCrudManualIdByPersistable implements Persistable {
 
-	private @Id String id;
-	private String name;
+    private @Id String id;
+    private String name;
 
-	//use this property to determine if the entity is new
-	@Transient
-	private boolean newEntity;
+    //use this property to determine if the entity is new
+    @Transient
+    private boolean newEntity;
 
-	public SimpleCrudManualIdByPersistable() {
-	}
+    public SimpleCrudManualIdByPersistable(){
 
-	public SimpleCrudManualIdByPersistable(String name) {
-		this.name = name;
-	}
-
-	public SimpleCrudManualIdByPersistable(String id, String name, boolean newEntity) {
-		this.id = id;
-		this.name = name;
-		this.newEntity = newEntity;
-	}
-
-	/**
-	 * used by Spring to determine if the entity is new or already present in the DB
-	 */
-	@Override
-	public boolean isNew() {
-		return newEntity;
-	}
-
-
-	public String getId() {return id;}
-
-
-	public void setId(String id) {this.id = id;}
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		SimpleCrudManualIdByPersistable entity = (SimpleCrudManualIdByPersistable) o;
-
-		return Objects.equals(id, entity.id);
     }
 
-	@Override
-	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		return result;
-	}
+    public SimpleCrudManualIdByPersistable(String name){
 
-	@Override
-	public String toString() {
-		return "SimpleCrudManualIdByPersistable{" +
-				"id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", newEntity=" + newEntity +
-				'}';
-	}
+        this.name = name;
+    }
+
+    public SimpleCrudManualIdByPersistable(String id, String name, boolean newEntity){
+
+        this.id = id;
+        this.name = name;
+        this.newEntity = newEntity;
+    }
+
+    /**
+     * used by Spring to determine if the entity is new or already present in the DB
+     */
+    @Override
+    public boolean isNew(){
+
+        return newEntity;
+    }
+
+
+    public String getId(){
+
+        return id;
+    }
+
+
+    public void setId(String id){
+
+        this.id = id;
+    }
+
+    public String getName(){
+
+        return name;
+    }
+    public void setName(String name){
+
+        this.name = name;
+    }
+
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        SimpleCrudManualIdByPersistable entity = (SimpleCrudManualIdByPersistable) o;
+
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode(){
+
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString(){
+
+        return "SimpleCrudManualIdByPersistable{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", newEntity=" + newEntity +
+                '}';
+    }
+
 }

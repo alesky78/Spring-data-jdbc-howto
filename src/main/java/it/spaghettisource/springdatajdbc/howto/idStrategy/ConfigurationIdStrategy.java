@@ -40,11 +40,11 @@ public class ConfigurationIdStrategy extends AbstractJdbcConfiguration {
      * The decision if the change will be an insert or update is made before this callback gets called.
      */
     @Bean
-    BeforeConvertCallback<SimpleCrudManualIdByCallBack> beforeSaveCallback() {
+    BeforeConvertCallback<SimpleCrudManualIdByCallBack> beforeSaveCallback(){
 
         return (entity) -> {
             //remember that if the ID is null spring has already determined to execute an INSERT
-            if (entity.getId() == null) {
+            if(entity.getId() == null){
                 entity.setId(UUID.randomUUID().toString()); //generate the ID in the code
             }
             return entity;

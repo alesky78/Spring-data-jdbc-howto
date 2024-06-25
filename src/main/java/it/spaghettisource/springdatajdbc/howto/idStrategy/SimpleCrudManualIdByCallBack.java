@@ -26,49 +26,63 @@ import java.util.Objects;
  */
 public class SimpleCrudManualIdByCallBack {
 
-	private @Id String id;
-	private String name;
+    private @Id String id;
+    private String name;
 
-	public SimpleCrudManualIdByCallBack() {
-	}
+    public SimpleCrudManualIdByCallBack(){
 
-	public SimpleCrudManualIdByCallBack(String name) {
-		this.name = name;
-	}
-
-	public String getId() {return id;}
-	public void setId(String id) {this.id = id;}
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		SimpleCrudManualIdByCallBack entity = (SimpleCrudManualIdByCallBack) o;
-
-		return Objects.equals(id, entity.id);
     }
 
-	@Override
-	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		return result;
-	}
+    public SimpleCrudManualIdByCallBack(String name){
 
-	@Override
-	public String toString() {
-		return "SimpleCrudManualId{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				'}';
-	}
+        this.name = name;
+    }
+
+    public String getId(){
+
+        return id;
+    }
+    public void setId(String id){
+
+        this.id = id;
+    }
+
+    public String getName(){
+
+        return name;
+    }
+    public void setName(String name){
+
+        this.name = name;
+    }
+
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        SimpleCrudManualIdByCallBack entity = (SimpleCrudManualIdByCallBack) o;
+
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode(){
+
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString(){
+
+        return "SimpleCrudManualId{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
 }

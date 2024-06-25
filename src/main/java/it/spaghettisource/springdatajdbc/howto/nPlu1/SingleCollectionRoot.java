@@ -28,55 +28,68 @@ import java.util.Set;
  */
 public class SingleCollectionRoot {
 
-	private @Id Long id;
-	private String name;
+    private @Id Long id;
+    private String name;
 
-	private Set<SingleCollectionNestedMany> list = new HashSet<>();
+    private Set<SingleCollectionNestedMany> list = new HashSet<>();
 
-	public SingleCollectionRoot() {}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+    public SingleCollectionRoot(){
 
-	public Set<SingleCollectionNestedMany> getList() {
-		return list;
-	}
+    }
+    public Long getId(){
 
-	public void setList(Set<SingleCollectionNestedMany> list) {
-		this.list = list;
-	}
+        return id;
+    }
+    public void setId(Long id){
 
-	public void add(SingleCollectionNestedMany nested){
-		list.add(nested);
-	}
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		SingleCollectionRoot that = (SingleCollectionRoot) o;
-		return Objects.equals(id, that.id);
-	}
+        this.id = id;
+    }
+    public String getName(){
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+        return name;
+    }
+    public void setName(String name){
 
-	@Override
-	public String toString() {
-		return "NPluOneRoot{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", list=" + list +
-				'}';
-	}
+        this.name = name;
+    }
+
+    public Set<SingleCollectionNestedMany> getList(){
+
+        return list;
+    }
+
+    public void setList(Set<SingleCollectionNestedMany> list){
+
+        this.list = list;
+    }
+
+    public void add(SingleCollectionNestedMany nested){
+
+        list.add(nested);
+    }
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        SingleCollectionRoot that = (SingleCollectionRoot) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode(){
+
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+
+        return "NPluOneRoot{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", list=" + list +
+                '}';
+    }
+
 }

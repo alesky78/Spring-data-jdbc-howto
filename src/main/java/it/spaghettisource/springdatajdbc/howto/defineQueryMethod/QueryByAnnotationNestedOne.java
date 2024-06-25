@@ -15,10 +15,6 @@
  */
 package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -28,39 +24,46 @@ import java.util.Objects;
  */
 public class QueryByAnnotationNestedOne {
 
-	private String nestedName;
+    private String nestedName;
 
-	public QueryByAnnotationNestedOne() {
-	}
+    public QueryByAnnotationNestedOne(){
+
+    }
 
 
-	public String getNestedName() {
-		return nestedName;
-	}
+    public String getNestedName(){
 
-	public void setNestedName(String nestedName) {
-		this.nestedName = nestedName;
-	}
+        return nestedName;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+    public void setNestedName(String nestedName){
 
-		QueryByAnnotationNestedOne that = (QueryByAnnotationNestedOne) o;
+        this.nestedName = nestedName;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        QueryByAnnotationNestedOne that = (QueryByAnnotationNestedOne) o;
 
         return Objects.equals(nestedName, that.nestedName);
     }
 
-	@Override
-	public int hashCode() {
-		return nestedName != null ? nestedName.hashCode() : 0;
-	}
+    @Override
+    public int hashCode(){
 
-	@Override
-	public String toString() {
-		return "QueryByAnnotationNestedOne{" +
-				"nestedName='" + nestedName + '\'' +
-				'}';
-	}
+        return nestedName != null ? nestedName.hashCode() : 0;
+    }
+
+    @Override
+    public String toString(){
+
+        return "QueryByAnnotationNestedOne{" +
+                "nestedName='" + nestedName + '\'' +
+                '}';
+    }
+
 }

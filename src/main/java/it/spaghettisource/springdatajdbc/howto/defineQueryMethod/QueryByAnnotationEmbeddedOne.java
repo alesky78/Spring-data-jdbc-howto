@@ -15,8 +15,6 @@
  */
 package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
-import org.springframework.data.annotation.Id;
-
 /**
  * simple entity
  *
@@ -25,41 +23,47 @@ import org.springframework.data.annotation.Id;
 public class QueryByAnnotationEmbeddedOne {
 
 
-	private String job;
-	private Integer age;
+    private String job;
+    private Integer age;
 
-	public QueryByAnnotationEmbeddedOne() {
-	}
+    public QueryByAnnotationEmbeddedOne(){
 
-	public QueryByAnnotationEmbeddedOne(String job, Integer age) {
-		this.job = job;
-		this.age = age;
-	}
-	public String getJob() {
-		return job;
-	}
+    }
 
-	public void setJob(String job) {
-		this.job = job;
-	}
+    public QueryByAnnotationEmbeddedOne(String job, Integer age){
 
-	public Integer getAge() {
-		return age;
-	}
+        this.job = job;
+        this.age = age;
+    }
+    public String getJob(){
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+        return job;
+    }
+
+    public void setJob(String job){
+
+        this.job = job;
+    }
+
+    public Integer getAge(){
+
+        return age;
+    }
+
+    public void setAge(Integer age){
+
+        this.age = age;
+    }
 
 
-	@Override
-	public String toString() {
-		return "PropertyExpressionsEmbedded{" +
-				"  job='" + job + '\'' +
-				", age=" + age +
-				'}';
-	}
+    @Override
+    public String toString(){
 
+        return "PropertyExpressionsEmbedded{" +
+                "  job='" + job + '\'' +
+                ", age=" + age +
+                '}';
+    }
 
 
 }

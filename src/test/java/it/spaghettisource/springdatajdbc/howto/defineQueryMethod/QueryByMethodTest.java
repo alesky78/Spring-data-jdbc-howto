@@ -25,8 +25,9 @@ public class QueryByMethodTest {
 
     @Test
     void findByParameter_UniqueResult(){
+
         var element = repository.findByName("Aldric");
-        logger.info("element found"+element.get());
+        logger.info("element found" + element.get());
 
         assertThat(element.isPresent()).isTrue();
     }
@@ -37,15 +38,17 @@ public class QueryByMethodTest {
      */
     @Test
     void MultypleResultNotHonored_Thorw_IncorrectResultSizeDataAccessException(){
+
         assertThrows(IncorrectResultSizeDataAccessException.class,
-                ()->{
+                () -> {
                     var element = repository.findByName("Maria");
-                    logger.info("element found"+element.get());
+                    logger.info("element found" + element.get());
                 });
     }
 
     @Test
     void greaterThen(){
+
         var elements = repository.findByAgeGreaterThan(100);
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -54,7 +57,8 @@ public class QueryByMethodTest {
 
     @Test
     void between(){
-        var elements = repository.findByAgeBetween(15,25);
+
+        var elements = repository.findByAgeBetween(15, 25);
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);
@@ -62,6 +66,7 @@ public class QueryByMethodTest {
 
     @Test
     void dateAfter(){
+
         var elements = repository.findByBirthDateAfter(LocalDate.parse("2020-01-01"));
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -70,7 +75,8 @@ public class QueryByMethodTest {
 
     @Test
     void in(){
-        var elements = repository.findByJobIn( Arrays.asList("DOCTOR", "DIRECTOR"));
+
+        var elements = repository.findByJobIn(Arrays.asList("DOCTOR", "DIRECTOR"));
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);
@@ -78,6 +84,7 @@ public class QueryByMethodTest {
 
     @Test
     void not(){
+
         var elements = repository.findByNameNot("Maria");
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -86,6 +93,7 @@ public class QueryByMethodTest {
 
     @Test
     void IgnoreCase(){
+
         var elements = repository.findByNameIgnoreCase("mARIA");
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -94,7 +102,8 @@ public class QueryByMethodTest {
 
     @Test
     void IgnoreCaseAll(){
-        var elements = repository.findByNameAndJobAllIgnoreCase("mARIA","director");
+
+        var elements = repository.findByNameAndJobAllIgnoreCase("mARIA", "director");
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);
@@ -102,6 +111,7 @@ public class QueryByMethodTest {
 
     @Test
     void contain(){
+
         var elements = repository.findByNameContaining("ari");
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -110,6 +120,7 @@ public class QueryByMethodTest {
 
     @Test
     void notContain(){
+
         var elements = repository.findByNameNotContaining("ari");
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -118,6 +129,7 @@ public class QueryByMethodTest {
 
     @Test
     void orderBy(){
+
         var elements = repository.findAllByOrderByAgeDesc();
         elements.forEach(e -> logger.info(e.toString()));
 
@@ -126,6 +138,7 @@ public class QueryByMethodTest {
 
     @Test
     void combinedOrderBy(){
+
         var elements = repository.findAllByOrderByAgeDescNameAsc();
         elements.forEach(e -> logger.info(e.toString()));
 

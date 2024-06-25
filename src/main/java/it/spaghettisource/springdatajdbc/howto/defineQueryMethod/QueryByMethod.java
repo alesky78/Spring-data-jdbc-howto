@@ -27,88 +27,102 @@ import java.util.Objects;
  */
 public class QueryByMethod {
 
-	private @Id Long id;
-	private String name;
-	private Integer age;
-	private LocalDate birthDate;
-	private String job;
+    private @Id Long id;
+    private String name;
+    private Integer age;
+    private LocalDate birthDate;
+    private String job;
 
-	public QueryByMethod(String name, Integer age, LocalDate birthDate, String job) {
-		this.name = name;
-		this.age = age;
-		this.birthDate = birthDate;
-		this.job = job;
-	}
+    public QueryByMethod(String name, Integer age, LocalDate birthDate, String job){
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		QueryByMethod that = (QueryByMethod) o;
-
-		return Objects.equals(id, that.id);
+        this.name = name;
+        this.age = age;
+        this.birthDate = birthDate;
+        this.job = job;
     }
 
-	@Override
-	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (age != null ? age.hashCode() : 0);
-		result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-		result = 31 * result + (job != null ? job.hashCode() : 0);
-		return result;
-	}
+    public Long getId(){
 
-	@Override
-	public String toString() {
-		return "SimpleQueryMethod{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", age=" + age +
-				", bornDate=" + birthDate +
-				", role='" + job + '\'' +
-				'}';
-	}
+        return id;
+    }
+
+    public void setId(Long id){
+
+        this.id = id;
+    }
+
+    public String getName(){
+
+        return name;
+    }
+
+    public void setName(String name){
+
+        this.name = name;
+    }
+
+    public Integer getAge(){
+
+        return age;
+    }
+
+    public void setAge(Integer age){
+
+        this.age = age;
+    }
+
+    public LocalDate getBirthDate(){
+
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate){
+
+        this.birthDate = birthDate;
+    }
+
+    public String getJob(){
+
+        return job;
+    }
+
+    public void setJob(String job){
+
+        this.job = job;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        QueryByMethod that = (QueryByMethod) o;
+
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode(){
+
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+        result = 31 * result + (job != null ? job.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString(){
+
+        return "SimpleQueryMethod{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", bornDate=" + birthDate +
+                ", role='" + job + '\'' +
+                '}';
+    }
 
 }

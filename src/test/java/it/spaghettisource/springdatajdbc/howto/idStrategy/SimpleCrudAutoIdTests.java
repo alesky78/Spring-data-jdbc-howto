@@ -15,15 +15,14 @@
  */
 package it.spaghettisource.springdatajdbc.howto.idStrategy;
 
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Demonstrates simple CRUD operations with a simple entity without any references.
@@ -34,48 +33,48 @@ import org.springframework.boot.test.context.SpringBootTest;
 @AutoConfigureJdbc
 class SimpleCrudAutoIdTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudAutoIdTests.class);
-	
-	@Autowired
-	SimpleCrudAutoIdRepository repository;
+    private static final Logger logger = LoggerFactory.getLogger(SimpleCrudAutoIdTests.class);
 
-	@Test
-	void createSimpleEntity() {
+    @Autowired
+    SimpleCrudAutoIdRepository repository;
 
-		// create some simple entity
-		var entity = repository.save(new SimpleCrudAutoId("simple entity with auto id generated"));
+    @Test
+    void createSimpleEntity(){
 
-		logger.info("Simple entity inserted: "+entity.toString());
+        // create some simple entity
+        var entity = repository.save(new SimpleCrudAutoId("simple entity with auto id generated"));
 
-		assertThat(entity.getId()).isNotNull();
+        logger.info("Simple entity inserted: " + entity.toString());
 
-	}
+        assertThat(entity.getId()).isNotNull();
 
-	@Test
-	void findSimpleEntity() {
+    }
 
-		// create some simple entity
-		var entity = repository.findById(1L);
+    @Test
+    void findSimpleEntity(){
 
-		logger.info("Simple entity found: "+entity.toString());
+        // create some simple entity
+        var entity = repository.findById(1L);
 
-		assertThat(entity).isNotNull();
+        logger.info("Simple entity found: " + entity.toString());
 
-	}
+        assertThat(entity).isNotNull();
 
-	@Test
-	void deleteSimpleEntity() {
+    }
 
-		// create some simple entity
-		var entity = repository.save(new SimpleCrudAutoId("to delete simple entity"));
+    @Test
+    void deleteSimpleEntity(){
 
-		logger.info("Simple entity to delete created: "+entity.toString());
+        // create some simple entity
+        var entity = repository.save(new SimpleCrudAutoId("to delete simple entity"));
 
-		repository.delete(entity);
-		var delete  = repository.findById(entity.getId());
+        logger.info("Simple entity to delete created: " + entity.toString());
 
-		assertThat(delete.isEmpty()).isTrue();
+        repository.delete(entity);
+        var delete = repository.findById(entity.getId());
 
-	}
+        assertThat(delete.isEmpty()).isTrue();
+
+    }
 
 }

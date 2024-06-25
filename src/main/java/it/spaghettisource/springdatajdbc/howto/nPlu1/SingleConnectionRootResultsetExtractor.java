@@ -5,14 +5,14 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SingleConnectionRootResultsetExtractor implements ResultSetExtractor<List<SingleCollectionRoot>> {
+
     @Override
-    public List<SingleCollectionRoot> extractData(ResultSet rs) throws SQLException, DataAccessException {
+    public List<SingleCollectionRoot> extractData(ResultSet rs) throws SQLException, DataAccessException{
 
         Map<Long,SingleCollectionRoot> map = new HashMap<>();
 
@@ -23,10 +23,10 @@ public class SingleConnectionRootResultsetExtractor implements ResultSetExtracto
             //populate the root
             id = rs.getLong("id");
             actual = map.get(id);
-            if(actual== null){
+            if(actual == null){
                 actual = new SingleCollectionRoot();
                 actual.setId(id);
-                map.put(id,actual);
+                map.put(id, actual);
             }
 
 
@@ -37,4 +37,5 @@ public class SingleConnectionRootResultsetExtractor implements ResultSetExtracto
         }
         return map.values().stream().toList();
     }
+
 }

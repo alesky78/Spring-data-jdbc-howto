@@ -33,51 +33,51 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureJdbc
 class SimpleCrudManualIdByCallBackTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimpleCrudManualIdByCallBackTests.class);
-	
-	@Autowired
-	SimpleCrudManualIdByCallBackRepository repository;
+    private static final Logger logger = LoggerFactory.getLogger(SimpleCrudManualIdByCallBackTests.class);
 
-	@Test
-	void createSimpleEntity() {
+    @Autowired
+    SimpleCrudManualIdByCallBackRepository repository;
 
-		// create some simple entity
-		repository.save(new SimpleCrudManualIdByCallBack("1 simple entity with manual id"));
-		repository.save(new SimpleCrudManualIdByCallBack("2 simple entity with manual id"));
-		repository.save(new SimpleCrudManualIdByCallBack("3 simple entity with manual id"));
+    @Test
+    void createSimpleEntity(){
 
-		var all = repository.findAll();
-		all.forEach(entity -> logger.info("Simple entity inserted: "+entity.toString()));
+        // create some simple entity
+        repository.save(new SimpleCrudManualIdByCallBack("1 simple entity with manual id"));
+        repository.save(new SimpleCrudManualIdByCallBack("2 simple entity with manual id"));
+        repository.save(new SimpleCrudManualIdByCallBack("3 simple entity with manual id"));
 
-		assertThat(all.size()).isGreaterThan(0);
-	}
+        var all = repository.findAll();
+        all.forEach(entity -> logger.info("Simple entity inserted: " + entity.toString()));
 
-	@Test
-	void findSimpleEntity() {
+        assertThat(all.size()).isGreaterThan(0);
+    }
 
-		// create some simple entity
-		var entity = repository.save(new SimpleCrudManualIdByCallBack("1 simple entity with manual id"));
-		var found = repository.findById(entity.getId());
+    @Test
+    void findSimpleEntity(){
 
-		logger.info("Simple entity found: "+found.isPresent());
+        // create some simple entity
+        var entity = repository.save(new SimpleCrudManualIdByCallBack("1 simple entity with manual id"));
+        var found = repository.findById(entity.getId());
 
-		assertThat(found.isPresent()).isTrue();
+        logger.info("Simple entity found: " + found.isPresent());
 
-	}
+        assertThat(found.isPresent()).isTrue();
 
-	@Test
-	void deleteSimpleEntity() {
+    }
 
-		// create some simple entity
-		var entity = repository.save(new SimpleCrudManualIdByCallBack("to delete simple entity"));
+    @Test
+    void deleteSimpleEntity(){
 
-		logger.info("Simple entity to delete created: "+entity.toString());
+        // create some simple entity
+        var entity = repository.save(new SimpleCrudManualIdByCallBack("to delete simple entity"));
 
-		repository.delete(entity);
-		var delete  = repository.findById(entity.getId());
+        logger.info("Simple entity to delete created: " + entity.toString());
 
-		assertThat(delete.isEmpty()).isTrue();
+        repository.delete(entity);
+        var delete = repository.findById(entity.getId());
 
-	}
+        assertThat(delete.isEmpty()).isTrue();
+
+    }
 
 }

@@ -22,4 +22,6 @@ import org.springframework.data.repository.ListCrudRepository;
  *
  * @author Alessandro D'Ottavio
  */
-interface SimpleCrudManualIdByCallBackRepository extends ListCrudRepository<SimpleCrudManualIdByCallBack, String>{}
+interface SimpleCrudManualIdByCallBackRepository extends ListCrudRepository<SimpleCrudManualIdByCallBack,String> {
+
+}

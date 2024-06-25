@@ -23,17 +23,17 @@ public class SingleCollectionTest {
     /**
      * this test exist just to show in the Log the N+1 statements execution
      */
-   @Test
-    public void test() {
+    @Test
+    public void test(){
 
-       var elements = repository.findAll();
-       elements.forEach(e -> logger.info(e.toString()));
+        var elements = repository.findAll();
+        elements.forEach(e -> logger.info(e.toString()));
 
-       assertThat(elements.size()).isGreaterThan(0);
+        assertThat(elements.size()).isGreaterThan(0);
     }
 
     @Test
-    public void findAll_Manual_ByQueryAnnotation() {
+    public void findAll_Manual_ByQueryAnnotation(){
 
         var elements = repository.findAllBy_SingleQuery_ByExtractor();
         elements.forEach(e -> logger.info(e.toString()));
@@ -42,7 +42,7 @@ public class SingleCollectionTest {
     }
 
     @Test
-    public void findAll_Manual_NamedParameterJdbcOperations() {
+    public void findAll_Manual_NamedParameterJdbcOperations(){
 
         var elements = repository.findAllBy_NamedParameterJdbcOperations();
         elements.forEach(e -> logger.info(e.toString()));
@@ -51,7 +51,7 @@ public class SingleCollectionTest {
     }
 
     @Test
-    public void findAll_Manual_JdbcTemplate() {
+    public void findAll_Manual_JdbcTemplate(){
 
         var elements = repository.findAllBy_JdbcTemplate();
         elements.forEach(e -> logger.info(e.toString()));

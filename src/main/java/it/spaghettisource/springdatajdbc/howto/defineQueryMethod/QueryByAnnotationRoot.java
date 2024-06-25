@@ -17,9 +17,7 @@ package it.spaghettisource.springdatajdbc.howto.defineQueryMethod;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,84 +30,99 @@ import static org.springframework.data.relational.core.mapping.Embedded.OnEmpty.
  */
 public class QueryByAnnotationRoot {
 
-	private @Id Long id;
-	private String name;
+    private @Id Long id;
+    private String name;
 
-	@Embedded(onEmpty = USE_EMPTY) // you could use USE_NULL
-	private QueryByAnnotationEmbeddedOne embedded;
+    @Embedded(onEmpty = USE_EMPTY) // you could use USE_NULL
+    private QueryByAnnotationEmbeddedOne embedded;
 
-	private QueryByAnnotationNestedOne nested;
+    private QueryByAnnotationNestedOne nested;
 
-	private Set<QueryByAnnotationNestedMany> list;
-
-
-	public QueryByAnnotationRoot() {}
+    private Set<QueryByAnnotationNestedMany> list;
 
 
+    public QueryByAnnotationRoot(){
 
-	public Long getId() {
-		return id;
-	}
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public String getName() {
-		return name;
-	}
+    public Long getId(){
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        return id;
+    }
 
-	public QueryByAnnotationEmbeddedOne getEmbedded() {
-		return embedded;
-	}
+    public void setId(Long id){
 
-	public void setEmbedded(QueryByAnnotationEmbeddedOne embedded) {
-		this.embedded = embedded;
-	}
+        this.id = id;
+    }
 
-	public QueryByAnnotationNestedOne getNested() {
-		return nested;
-	}
+    public String getName(){
 
-	public void setNested(QueryByAnnotationNestedOne nested) {
-		this.nested = nested;
-	}
+        return name;
+    }
 
-	public Set<QueryByAnnotationNestedMany> getList() {
-		return list;
-	}
+    public void setName(String name){
 
-	public void setList(Set<QueryByAnnotationNestedMany> set) {
-		this.list = set;
-	}
+        this.name = name;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+    public QueryByAnnotationEmbeddedOne getEmbedded(){
 
-		QueryByAnnotationRoot that = (QueryByAnnotationRoot) o;
+        return embedded;
+    }
+
+    public void setEmbedded(QueryByAnnotationEmbeddedOne embedded){
+
+        this.embedded = embedded;
+    }
+
+    public QueryByAnnotationNestedOne getNested(){
+
+        return nested;
+    }
+
+    public void setNested(QueryByAnnotationNestedOne nested){
+
+        this.nested = nested;
+    }
+
+    public Set<QueryByAnnotationNestedMany> getList(){
+
+        return list;
+    }
+
+    public void setList(Set<QueryByAnnotationNestedMany> set){
+
+        this.list = set;
+    }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        QueryByAnnotationRoot that = (QueryByAnnotationRoot) o;
 
         return Objects.equals(id, that.id);
     }
 
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
+    @Override
+    public int hashCode(){
 
-	@Override
-	public String toString() {
-		return "QueryByAnnotationRoot{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", embedded=" + embedded +
-				", nested=" + nested +
-				", list=" + list +
-				'}';
-	}
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString(){
+
+        return "QueryByAnnotationRoot{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", embedded=" + embedded +
+                ", nested=" + nested +
+                ", list=" + list +
+                '}';
+    }
+
 }
