@@ -5,8 +5,10 @@ import java.util.List;
 public interface SingleCollectionRootRepositoryFragment {
 
 
-    List<SingleCollectionRoot> findAllBy_NamedParameterJdbcOperations();
+    List<SingleCollectionRoot> findAllBy_NamedParameterJdbcTemplate();
 
     List<SingleCollectionRoot> findAllBy_JdbcTemplate();
+
+    List<SingleCollectionRoot> findAllBy_JdbcClient();
 
 }

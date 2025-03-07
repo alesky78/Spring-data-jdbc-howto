@@ -44,7 +44,7 @@ public class SingleCollectionTest {
     @Test
     public void findAll_Manual_NamedParameterJdbcOperations(){
 
-        var elements = repository.findAllBy_NamedParameterJdbcOperations();
+        var elements = repository.findAllBy_NamedParameterJdbcTemplate();
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);
@@ -54,6 +54,15 @@ public class SingleCollectionTest {
     public void findAll_Manual_JdbcTemplate(){
 
         var elements = repository.findAllBy_JdbcTemplate();
+        elements.forEach(e -> logger.info(e.toString()));
+
+        assertThat(elements.size()).isGreaterThan(0);
+    }
+
+    @Test
+    public void findAll_Manual_JdbcClient(){
+
+        var elements = repository.findAllBy_JdbcClient();
         elements.forEach(e -> logger.info(e.toString()));
 
         assertThat(elements.size()).isGreaterThan(0);

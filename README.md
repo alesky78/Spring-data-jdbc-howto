@@ -286,5 +286,6 @@ the solution proposed are:
 * prepare a @Query annotation with a join over all the tables and configure a custom ResultSetExtractor
 * extend the repository and use JdbcAggregateTemplate to write again custom query that solve the N+1 problem, in this
   case the solution is exactly the same as before
-  but we show how we can do it using the NamedParameterJdbcOperations instead that in a custom @Query annotation
-* extend the repository like in the previous case, but use directly the jdbc spring utility: JdbcTemplate 
+  but we show how we can do it using the NamedParameterJdbcTemplate instead that in a custom @Query annotation
+* extend the repository like in the previous case, but use directly the jdbc spring utility: JdbcTemplate
+* extend the repository like in the previous case, but use directly the jdbc spring utility: jdbcClient the new utility of Spring to implement fluent API 
