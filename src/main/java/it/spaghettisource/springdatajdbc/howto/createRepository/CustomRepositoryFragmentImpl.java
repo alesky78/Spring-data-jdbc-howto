@@ -2,11 +2,11 @@ package it.spaghettisource.springdatajdbc.howto.createRepository;
 
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 
-public class CustomRepositoryInsertFragmentImpl<T, ID> implements CustomRepositoryInsertFragment<T,ID> {
+public class CustomRepositoryFragmentImpl<T, ID> implements CustomRepositoryFragment<T,ID> {
 
     private final JdbcAggregateTemplate template;
 
-    public CustomRepositoryInsertFragmentImpl(JdbcAggregateTemplate template){
+    public CustomRepositoryFragmentImpl(JdbcAggregateTemplate template){
 
         this.template = template;
     }
@@ -15,6 +15,11 @@ public class CustomRepositoryInsertFragmentImpl<T, ID> implements CustomReposito
     public T insert(T t){
 
         return template.insert(t);
+    }
+
+    @Override
+    public void update(T t){
+        template.update(t);
     }
 
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = ConfigurationCreateRepository.class)
@@ -25,7 +27,19 @@ public class CustomRepositoryTest {
         logger.info("forced INSERT by fragment interface:" + created);
 
         created = repository.save(created);
-        logger.info("fstandard save:" + created);
+        logger.info("standard save:" + created);
+
+        assertThat(created).isNotNull();
+    }
+
+    @Test
+    void forceUpdateByFragmentInterface(){
+
+        List<Custom> created = repository.findAll();
+        logger.info("found all the entities");
+
+        repository.update(created.getFirst());
+        logger.info("forced by fragment interface:");
 
         assertThat(created).isNotNull();
     }

@@ -84,7 +84,7 @@ this example analyze the main aspects described in the official documentation
 * [Paging, Iterating Large Results, Sorting & Limiting](https://docs.spring.io/spring-data/relational/reference/repositories/query-methods-details.html#repositories.special-parameters)
 * [Custom Repository Implementations](https://docs.spring.io/spring-data/relational/reference/repositories/custom-implementations.html)
 
-This package doesn't do example for this topics, that are more related to configuration of the application:
+This package doesn't do example for this topic, that are more related to the configuration of the application:
 
 * [Using Repositories with Multiple Spring Data Modules](https://docs.spring.io/spring-data/relational/reference/repositories/definition.html#repositories.multiple-modules)
 * [Using filter](https://docs.spring.io/spring-data/relational/reference/repositories/create-instances.html#repositories.using-filters)
@@ -110,7 +110,7 @@ Important Note to remember:
 ### test: CustomRepositoryTest
 
 This test show the capacity of Spring Data to Extend a Repository using the fragment interfaces.
-In this example we use the extension of the repository to create a generic Insert method that at low level use the
+In this example we use the extension of the repository to create a generic Insert and update method that at low level use the
 [JdbcAggregateTemplate](https://docs.spring.io/spring-data/jdbc/docs/current/api/org/springframework/data/jdbc/core/JdbcAggregateTemplate.html),
 This permit to control the behaviour of the repository forcing INSERT or UPDATE and skip the Entity State Detection
 Strategies logic exposed by Spring Data JBDC.
